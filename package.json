@@ -1,27 +1,44 @@
 {
-  "name": "livemenu-ui",
+  "name": "@YOUR_USERNAME/livemenu-ui",
   "version": "1.0.0",
   "description": "A React component library for LiveMenu",
-  "private": true,
+  "private": false,
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/types/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -c -w",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "publish:github": "npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YOUR_USERNAME/livemenu-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/YOUR_USERNAME/livemenu-ui/issues"
+  },
+  "homepage": "https://github.com/YOUR_USERNAME/livemenu-ui#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
   },
   "keywords": [
     "react",
     "components",
     "ui",
-    "livemenu"
+    "livemenu",
+    "tailwind",
+    "typescript"
   ],
-  "author": "",
+  "author": "LiveMenu Team",
   "license": "MIT",
   "peerDependencies": {
     "react": "^18.0.0",

@@ -128,7 +128,7 @@ export const LiveMenuInput: React.FC<LiveMenuInputProps> = ({
         {/* Left Icon */}
         {leftIcon && (
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <span className="text-gray-500">
+            <span className="livemenu-text-tertiary">
               {leftIcon}
             </span>
           </div>
@@ -155,7 +155,7 @@ export const LiveMenuInput: React.FC<LiveMenuInputProps> = ({
         {/* Right Icon */}
         {rightIcon && (
           <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-            <span className={error ? 'text-danger' : 'text-gray-500'}>
+            <span className={error ? 'text-danger' : 'livemenu-text-tertiary'}>
               {rightIcon}
             </span>
           </div>
@@ -177,7 +177,7 @@ export const LiveMenuInput: React.FC<LiveMenuInputProps> = ({
       {!error && helperText && (
         <p 
           id="input-helper" 
-          className="mt-1 text-sm text-gray-600"
+          className="mt-1 text-sm livemenu-text-secondary"
         >
           {helperText}
         </p>

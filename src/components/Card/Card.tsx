@@ -74,12 +74,12 @@ export const LiveMenuCard: React.FC<LiveMenuCardProps> = ({
       {hasHeader && (
         <div className="livemenu-card-header">
           {title && (
-            <div className="text-lg font-semibold text-gray-900">
+            <div className="text-lg font-semibold livemenu-text-primary">
               {title}
             </div>
           )}
           {subtitle && (
-            <div className="text-sm text-gray-600 mt-1">
+            <div className="text-sm livemenu-text-secondary mt-1">
               {subtitle}
             </div>
           )}

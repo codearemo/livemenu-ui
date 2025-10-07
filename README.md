@@ -10,7 +10,9 @@
 
 **A production-ready React component library for LiveMenu with Tailwind CSS styling and a custom orange color palette.**
 
-[Components](#-components) • [Installation](#-installation) • [Setup](#-setup-in-consuming-projects) • [Examples](#-usage-examples) • [Development](#-development)
+[Components](#-components) • [Installation](#-installation) • [Setup](#-setup-in-consuming-projects) • [Documentation](docs/) • [Examples](#-usage-examples)
+
+📖 **[Complete Documentation →](docs/)**
 
 </div>
 
@@ -192,7 +194,7 @@ A versatile button component with 7 variants, 3 sizes, and full customization op
 </LiveMenuButton>
 ```
 
-[📚 View detailed examples →](EXAMPLES.md)
+[📚 View detailed examples →](docs/components/button.md)
 
 ---
 
@@ -219,7 +221,7 @@ A flexible card component with optional header, body, footer, and hover effects.
 </LiveMenuCard>
 ```
 
-[📚 View detailed examples →](CARD_EXAMPLES.md)
+[📚 View detailed examples →](docs/components/card.md)
 
 ---
 
@@ -241,7 +243,7 @@ Small label component for status indicators, counts, tags, and labels.
 </LiveMenuBadge>
 ```
 
-[📚 View detailed examples →](BADGE_EXAMPLES.md)
+[📚 View detailed examples →](docs/components/badge.md)
 
 ---
 
@@ -268,7 +270,30 @@ Comprehensive input component with labels, icons, validation, and error states.
 />
 ```
 
-[📚 View detailed examples →](INPUT_EXAMPLES.md)
+[📚 View detailed examples →](docs/components/input.md)
+
+---
+
+### Form Components
+
+Additional form components for complete form building.
+
+**LiveMenuAlert** - Notifications and messages  
+**LiveMenuDropdown** - Custom select with icons  
+**LiveMenuCheckbox** - Checkbox with label  
+**LiveMenuRadio** - Radio button groups  
+**LiveMenuTextarea** - Multi-line text input  
+**LiveMenuSwitch** - Toggle switch component  
+
+**Quick Example:**
+```tsx
+<LiveMenuAlert variant="success">Saved!</LiveMenuAlert>
+<LiveMenuDropdown options={countries} onChange={setCountry} />
+<LiveMenuCheckbox label="I agree" checked={agreed} />
+<LiveMenuSwitch label="Dark mode" checked={dark} />
+```
+
+[📚 View all form components →](docs/components/form-components.md)
 
 ---
 
@@ -398,7 +423,7 @@ livemenu-input, livemenu-label, livemenu-textarea, livemenu-select
 livemenu-link, livemenu-divider, livemenu-shadow
 ```
 
-[View all component classes →](COMPONENTS.md)
+[View all component classes →](docs/styling/tailwind-classes.md)
 
 ### Color Palette
 
@@ -412,7 +437,7 @@ Access the LiveMenu orange palette through Tailwind classes:
 <input className="focus:ring-livemenu" />
 ```
 
-[View complete color documentation →](COLOR_PALETTE.md)
+[View complete color documentation →](docs/styling/colors.md)
 
 ---
 
@@ -512,7 +537,11 @@ When creating new components, follow these conventions:
    export type { LiveMenuComponentNameProps } from './ComponentName';
    ```
 
+See the [Component Template Guide](docs/guides/creating-components.md) for complete details.
+
 ### Testing Locally
+
+See the [Development Guide](docs/guides/development.md) for complete workflow.
 
 ```bash
 # In the livemenu-ui directory
@@ -523,8 +552,6 @@ npm link livemenu-ui
 
 # Make changes and rebuild
 npm run watch  # In livemenu-ui directory
-
-# Your test project will use the linked version
 ```
 
 ### Building for Production
@@ -613,13 +640,27 @@ When adding new components or features:
 
 ## 📚 Documentation
 
-- **[Component Examples](EXAMPLES.md)** - LiveMenuButton examples
-- **[Card Examples](CARD_EXAMPLES.md)** - LiveMenuCard examples
-- **[Badge Examples](BADGE_EXAMPLES.md)** - LiveMenuBadge examples
-- **[Input Examples](INPUT_EXAMPLES.md)** - LiveMenuInput examples
-- **[Component Classes](COMPONENTS.md)** - Complete Tailwind class reference
-- **[Color Palette](COLOR_PALETTE.md)** - Detailed color documentation
-- **[Library Summary](LIBRARY_SUMMARY.md)** - Complete library overview
+### Getting Started
+- **[Quick Start](docs/getting-started/quick-start.md)** - 5-minute setup guide
+- **[Installation](docs/getting-started/installation.md)** - Complete installation guide
+
+### Components
+- **[Button](docs/components/button.md)** - Button examples and API
+- **[Card](docs/components/card.md)** - Card examples and API
+- **[Badge](docs/components/badge.md)** - Badge examples and API
+- **[Input](docs/components/input.md)** - Input examples and API
+- **[Form Components](docs/components/form-components.md)** - Alert, Dropdown, Checkbox, Radio, Textarea, Switch
+- **[Theme](docs/components/theme.md)** - ThemeProvider and dark mode
+
+### Styling
+- **[Dark Mode](docs/styling/dark-mode.md)** - Complete dark mode guide
+- **[Colors](docs/styling/colors.md)** - Color palette reference
+- **[Tailwind Classes](docs/styling/tailwind-classes.md)** - Utility classes
+
+### Development
+- **[Development Guide](docs/guides/development.md)** - Development workflow
+- **[Creating Components](docs/guides/creating-components.md)** - Component templates
+- **[Publishing](docs/guides/publishing.md)** - GitHub Packages guide
 
 ---
 

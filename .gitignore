@@ -56,6 +56,10 @@ coverage/
 .env.production.local
 .env*.local
 
+# NPM authentication (never commit tokens!)
+.npmrc.local
+**/._npmrc
+
 # Temporary files
 *.tmp
 *.temp

@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     './src/**/*.{js,jsx,ts,tsx}',
   ],
@@ -21,6 +22,11 @@ export default {
     { pattern: /^livemenu-link/ },
     { pattern: /^livemenu-divider/ },
     { pattern: /^livemenu-shadow/ },
+    // Dark mode utility classes
+    { pattern: /^livemenu-text/ },
+    { pattern: /^livemenu-bg/ },
+    { pattern: /^livemenu-border/ },
+    { pattern: /^livemenu-surface/ },
   ],
   theme: {
     extend: {
@@ -119,6 +125,20 @@ export default {
           800: '#1e40af',
           900: '#1e3a8a',
           DEFAULT: '#3b82f6',
+        },
+        // Dark mode colors
+        dark: {
+          bg: {
+            primary: '#1a1a1a',
+            secondary: '#2d2d2d',
+            tertiary: '#3d3d3d',
+          },
+          text: {
+            primary: '#ffffff',
+            secondary: '#b3b3b3',
+            tertiary: '#808080',
+          },
+          border: '#404040',
         },
       },
     },
