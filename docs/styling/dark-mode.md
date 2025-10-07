@@ -388,7 +388,7 @@ Inputs have full dark mode support:
   type="email"
   placeholder="you@example.com"
   helperText="We'll never share your email"  {/* Auto: adapts */}
-  leftIcon={<MailIcon />}         {/* Auto: adapts */}
+  prefix={<MailIcon />}         {/* Auto: adapts */}
 />
 ```
 

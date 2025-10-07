@@ -1,6 +1,6 @@
 import React from 'react';
 
-export interface LiveMenuInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
+export interface LiveMenuInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix'> {
   /**
    * Input type
    */
@@ -46,13 +46,13 @@ export interface LiveMenuInputProps extends Omit<React.InputHTMLAttributes<HTMLI
    */
   helperText?: string;
   /**
-   * Icon displayed on the left side
+   * Icon or element displayed on the left side (prefix)
    */
-  leftIcon?: React.ReactNode;
+  prefix?: React.ReactNode;
   /**
-   * Icon displayed on the right side
+   * Icon or element displayed on the right side (suffix)
    */
-  rightIcon?: React.ReactNode;
+  suffix?: React.ReactNode;
   /**
    * Whether the input should take full width
    */
@@ -89,8 +89,8 @@ export const LiveMenuInput: React.FC<LiveMenuInputProps> = ({
   label,
   error,
   helperText,
-  leftIcon,
-  rightIcon,
+  prefix,
+  suffix,
   fullWidth = false,
   className = '',
   ...props
@@ -102,7 +102,7 @@ export const LiveMenuInput: React.FC<LiveMenuInputProps> = ({
   const fullWidthClass = fullWidth ? 'w-full' : '';
   
   // Padding adjustments for icons
-  const iconPaddingClass = leftIcon ? 'pl-10' : rightIcon ? 'pr-10' : '';
+  const iconPaddingClass = prefix ? 'pl-10' : suffix ? 'pr-10' : '';
   
   // Combine input classes
   const inputClasses = [
@@ -125,11 +125,11 @@ export const LiveMenuInput: React.FC<LiveMenuInputProps> = ({
       
       {/* Input Container */}
       <div className="relative">
-        {/* Left Icon */}
-        {leftIcon && (
+        {/* Prefix */}
+        {prefix && (
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <span className="livemenu-text-tertiary">
-              {leftIcon}
+              {prefix}
             </span>
           </div>
         )}
@@ -152,11 +152,11 @@ export const LiveMenuInput: React.FC<LiveMenuInputProps> = ({
           {...props}
         />
         
-        {/* Right Icon */}
-        {rightIcon && (
+        {/* Suffix */}
+        {suffix && (
           <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
             <span className={error ? 'text-danger' : 'livemenu-text-tertiary'}>
-              {rightIcon}
+              {suffix}
             </span>
           </div>
         )}

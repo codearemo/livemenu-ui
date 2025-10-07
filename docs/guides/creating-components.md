@@ -460,11 +460,11 @@ export interface LiveMenuComponentNameProps {
   subtitle?: string | React.ReactNode;
   
   /**
-   * Icon to display (left or right)
+   * Icon to display (prefix or suffix)
    */
   icon?: React.ReactNode;
-  leftIcon?: React.ReactNode;
-  rightIcon?: React.ReactNode;
+  prefix?: React.ReactNode;
+  suffix?: React.ReactNode;
   
   /**
    * Helper text

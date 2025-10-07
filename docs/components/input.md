@@ -161,12 +161,12 @@ import { Input } from 'livemenu-ui'; // Legacy alias
 
 ## Icons
 
-### Left Icon (Search)
+### Prefix (Search Icon)
 ```tsx
 <LiveMenuInput 
   label="Search"
   placeholder="Search products..."
-  leftIcon={
+  prefix={
     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
     </svg>
@@ -174,13 +174,13 @@ import { Input } from 'livemenu-ui'; // Legacy alias
 />
 ```
 
-### Right Icon (Password Visibility)
+### Suffix (Password Visibility)
 ```tsx
 <LiveMenuInput 
   label="Password"
   type="password"
   placeholder="Enter password"
-  rightIcon={
+  suffix={
     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -195,7 +195,7 @@ import { Input } from 'livemenu-ui'; // Legacy alias
   label="Email"
   type="email"
   placeholder="john@example.com"
-  leftIcon={
+  prefix={
     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
     </svg>
@@ -210,7 +210,7 @@ import { Input } from 'livemenu-ui'; // Legacy alias
   type="email"
   value="invalid"
   error="Invalid email format"
-  rightIcon={
+  suffix={
     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
       <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
     </svg>
@@ -302,7 +302,7 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     placeholder="Enter your email"
     required
     fullWidth
-    leftIcon={<MailIcon />}
+    prefix={<MailIcon />}
   />
   <LiveMenuInput 
     label="Password"
@@ -310,7 +310,7 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     placeholder="Enter your password"
     required
     fullWidth
-    leftIcon={<LockIcon />}
+    prefix={<LockIcon />}
   />
   <LiveMenuButton variant="primary" fullWidth>
     Sign In
@@ -394,7 +394,7 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   type="search"
   placeholder="Search for products, brands, and more..."
   fullWidth
-  leftIcon={<SearchIcon />}
+  prefix={<SearchIcon />}
 />
 ```
 
@@ -426,8 +426,8 @@ interface LiveMenuInputProps {
   label?: string | React.ReactNode;
   error?: string;
   helperText?: string;
-  leftIcon?: React.ReactNode;
-  rightIcon?: React.ReactNode;
+  prefix?: React.ReactNode;
+  suffix?: React.ReactNode;
   fullWidth?: boolean;
   className?: string;
   // ... extends all HTML input attributes
@@ -438,7 +438,7 @@ interface LiveMenuInputProps {
 
 - ✅ **Orange focus ring** - Brand-colored focus state
 - ✅ **Error states** - Red border and text for errors
-- ✅ **Icon support** - Left and right icon slots
+- ✅ **Icon support** - Prefix and suffix icon slots
 - ✅ **Helper text** - Additional context below input
 - ✅ **Required indicator** - Asterisk for required fields
 - ✅ **Disabled styling** - Grayed out appearance
