@@ -1,25 +1,33 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-export interface DropdownOption {
+export interface DropdownOption<T = null> {
   label: string;
-  value: string;
+  value: T;
   disabled?: boolean;
   icon?: React.ReactNode;
+  /**
+   * Element displayed before the label (prefix)
+   */
+  prefix?: React.ReactNode;
+  /**
+   * Element displayed after the label (suffix)
+   */
+  suffix?: React.ReactNode;
 }
 
-export interface LiveMenuDropdownProps {
+export interface LiveMenuDropdownProps<T = null> {
   /**
    * Dropdown options
    */
-  options: DropdownOption[];
+  options: DropdownOption<T>[];
   /**
    * Currently selected value
    */
-  value?: string;
+  value?: T;
   /**
    * Change handler
    */
-  onChange?: (value: string) => void;
+  onChange?: (value: T) => void;
   /**
    * Placeholder text when nothing selected
    */
@@ -45,6 +53,14 @@ export interface LiveMenuDropdownProps {
    */
   fullWidth?: boolean;
   /**
+   * Element displayed on the left side of the dropdown button (prefix)
+   */
+  prefix?: React.ReactNode;
+  /**
+   * Element displayed on the right side of the dropdown button before the arrow (suffix)
+   */
+  suffix?: React.ReactNode;
+  /**
    * Additional CSS classes
    */
   className?: string;
@@ -65,7 +81,7 @@ export interface LiveMenuDropdownProps {
  * />
  * ```
  */
-export const LiveMenuDropdown: React.FC<LiveMenuDropdownProps> = ({
+export const LiveMenuDropdown = <T = null,>({
   options,
   value,
   onChange,
@@ -75,8 +91,10 @@ export const LiveMenuDropdown: React.FC<LiveMenuDropdownProps> = ({
   required = false,
   error,
   fullWidth = false,
+  prefix,
+  suffix,
   className = '',
-}) => {
+}: LiveMenuDropdownProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -106,7 +124,7 @@ export const LiveMenuDropdown: React.FC<LiveMenuDropdownProps> = ({
     }
   };
 
-  const handleSelect = (optionValue: string) => {
+  const handleSelect = (optionValue: T) => {
     if (onChange) {
       onChange(optionValue);
     }
@@ -115,6 +133,7 @@ export const LiveMenuDropdown: React.FC<LiveMenuDropdownProps> = ({
 
   const baseClass = error ? 'livemenu-input-error' : 'livemenu-input';
   const fullWidthClass = fullWidth ? 'w-full' : '';
+  const iconPaddingClass = prefix ? 'pl-10' : '';
 
   return (
     <div className={fullWidth ? 'w-full' : ''} ref={dropdownRef}>
@@ -127,13 +146,22 @@ export const LiveMenuDropdown: React.FC<LiveMenuDropdownProps> = ({
 
       {/* Dropdown Button */}
       <div className="relative">
+        {/* Prefix */}
+        {prefix && (
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
+            <span className="livemenu-text-tertiary">
+              {prefix}
+            </span>
+          </div>
+        )}
+
         <button
           type="button"
           onClick={() => !disabled && setIsOpen(!isOpen)}
           onKeyDown={handleKeyDown}
           disabled={disabled}
           className={`
-            ${baseClass} ${fullWidthClass} ${className}
+            ${baseClass} ${fullWidthClass} ${iconPaddingClass} ${className}
             flex items-center justify-between
             cursor-pointer
             ${disabled ? 'cursor-not-allowed' : ''}
@@ -141,26 +169,34 @@ export const LiveMenuDropdown: React.FC<LiveMenuDropdownProps> = ({
           aria-haspopup="listbox"
           aria-expanded={isOpen}
         >
-          <span className={selectedOption ? 'livemenu-text-primary' : 'livemenu-text-tertiary'}>
+          <span className={`${selectedOption ? 'livemenu-text-primary' : 'livemenu-text-tertiary'} flex items-center gap-2`}>
             {selectedOption ? (
-              <span className="flex items-center gap-2">
-                {selectedOption.icon}
+              <>
+                {selectedOption.prefix || selectedOption.icon}
                 {selectedOption.label}
-              </span>
+                {selectedOption.suffix}
+              </>
             ) : (
               placeholder
             )}
           </span>
-          <svg
-            className={`w-5 h-5 livemenu-text-tertiary transition-transform ${
-              isOpen ? 'transform rotate-180' : ''
-            }`}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
+          <div className="flex items-center gap-2">
+            {suffix && (
+              <span className="livemenu-text-tertiary">
+                {suffix}
+              </span>
+            )}
+            <svg
+              className={`w-5 h-5 livemenu-text-tertiary transition-transform ${
+                isOpen ? 'transform rotate-180' : ''
+              }`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
         </button>
 
         {/* Dropdown Menu */}
@@ -174,9 +210,9 @@ export const LiveMenuDropdown: React.FC<LiveMenuDropdownProps> = ({
             "
             role="listbox"
           >
-            {options.map((option) => (
+            {options.map((option, index) => (
               <button
-                key={option.value}
+                key={index}
                 type="button"
                 onClick={() => !option.disabled && handleSelect(option.value)}
                 disabled={option.disabled}
@@ -195,8 +231,9 @@ export const LiveMenuDropdown: React.FC<LiveMenuDropdownProps> = ({
                 role="option"
                 aria-selected={option.value === value}
               >
-                {option.icon}
+                {option.prefix || option.icon}
                 {option.label}
+                {option.suffix}
                 {option.value === value && (
                   <svg className="w-4 h-4 ml-auto text-livemenu" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -220,5 +257,5 @@ export const LiveMenuDropdown: React.FC<LiveMenuDropdownProps> = ({
 
 // Legacy export
 export const Dropdown = LiveMenuDropdown;
-export type DropdownProps = LiveMenuDropdownProps;
+export type DropdownProps<T = null> = LiveMenuDropdownProps<T>;
 
