@@ -3,7 +3,7 @@
 <div align="center">
 
 ![Version](https://img.shields.io/badge/version-1.0.0-orange)
-![React](https://img.shields.io/badge/React-18.x-blue)
+![React](https://img.shields.io/badge/React-18.x%20%7C%2019.x-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
 ![Tailwind](https://img.shields.io/badge/Tailwind-3.x-38bdf8)
 ![License](https://img.shields.io/badge/license-MIT-green)
@@ -24,20 +24,24 @@ LiveMenu UI is a comprehensive React component library built with TypeScript and
 
 ### Key Features
 
-✨ **4 Core Components** - Button, Card, Badge, and Input  
+✨ **15+ Components** - Button, Card, Badge, Input, Modal, Toast, Theme, and more  
 🎨 **Custom Color Palette** - 10+ orange shades + semantic colors  
 🔒 **TypeScript First** - Full type safety and IntelliSense support  
 ♿ **Accessible** - WCAG AA compliant with ARIA attributes  
 📦 **Tree-shakeable** - Import only what you need  
-🎯 **Tailwind CSS** - 44+ custom utility classes  
+🎯 **Tailwind CSS** - 45+ custom utility classes  
 📱 **Responsive** - Mobile-first design approach  
-🚀 **Production Ready** - Minified, optimized, and tested
+🚀 **Production Ready** - Minified, optimized, and tested  
+🌗 **Dark Mode** - Built-in dark mode support with ThemeProvider  
+⚡ **React 18 & 19** - Compatible with latest React versions
 
 ---
 
 ## 📦 Installation
 
-### From GitHub Private Repository
+### From GitHub Repository
+
+The library **automatically builds** when installed from GitHub:
 
 ```bash
 # Using npm
@@ -52,6 +56,8 @@ pnpm add git+https://github.com/codearemo/livemenu-ui.git
 # Or from GitHub Packages (after publishing)
 npm install @codearemo/livemenu-ui
 ```
+
+> **Note:** The library includes a `prepare` script that automatically runs `npm run build` during installation from GitHub, so you don't need to build it manually.
 
 ### From Local Development
 
@@ -82,10 +88,14 @@ npm link livemenu-ui
 
 ### 1. Install Peer Dependencies
 
-LiveMenu UI requires React and React-DOM as peer dependencies:
+LiveMenu UI supports React 18.x and 19.x:
 
 ```bash
+# React 18
 npm install react@^18.0.0 react-dom@^18.0.0
+
+# React 19 (also supported)
+npm install react@^19.0.0 react-dom@^19.0.0
 ```
 
 ### 2. Configure Tailwind CSS
@@ -181,10 +191,10 @@ If using TypeScript, ensure your `tsconfig.json` includes:
 
 ### LiveMenuButton
 
-A versatile button component with 7 variants, 3 sizes, and full customization options.
+A versatile button component with 8 variants, 3 sizes, and full customization options.
 
 **Key Features:**
-- 7 variants: primary, secondary, outline, light, dark, success, danger
+- 8 variants: primary, secondary, outline, light, dark, text, success, danger, warning
 - 3 sizes: sm, md, lg
 - Full-width option
 - Disabled state
@@ -194,6 +204,10 @@ A versatile button component with 7 variants, 3 sizes, and full customization op
 ```tsx
 <LiveMenuButton variant="primary" size="md" onClick={handleClick}>
   Click Me
+</LiveMenuButton>
+
+<LiveMenuButton variant="text">
+  Text Link Style
 </LiveMenuButton>
 ```
 
@@ -400,6 +414,56 @@ showToast('Hello!', {
 
 ---
 
+### LiveMenuThemeProvider
+
+Built-in dark mode support with automatic system detection and manual toggle.
+
+**Key Features:**
+- Automatic dark mode detection
+- Manual theme switching
+- Persistent theme preference
+- ThemeToggle component included
+- CSS custom properties for theming
+
+**Quick Example:**
+```tsx
+import { LiveMenuThemeProvider, LiveMenuThemeToggle, useTheme } from 'livemenu-ui';
+
+// Wrap your app
+<LiveMenuThemeProvider>
+  <App />
+  <LiveMenuThemeToggle />
+</LiveMenuThemeProvider>
+
+// Use in components
+const { theme, setTheme } = useTheme();
+```
+
+[📚 View theme documentation →](docs/components/theme.md)
+
+---
+
+## 📦 Complete Component List
+
+| Component | Description |
+|-----------|-------------|
+| **LiveMenuButton** | Versatile button with 8 variants |
+| **LiveMenuCard** | Flexible card with header, body, footer |
+| **LiveMenuBadge** | Status indicators and labels |
+| **LiveMenuInput** | Text input with validation |
+| **LiveMenuTextarea** | Multi-line text input |
+| **LiveMenuDropdown** | Custom select dropdown |
+| **LiveMenuCheckbox** | Checkbox with label |
+| **LiveMenuRadio** | Radio button groups |
+| **LiveMenuSwitch** | Toggle switch |
+| **LiveMenuAlert** | Notification messages |
+| **LiveMenuModal** | Modal dialog system |
+| **LiveMenuToast** | Toast notifications |
+| **LiveMenuThemeProvider** | Dark mode support |
+| **LiveMenuThemeToggle** | Theme switcher button |
+
+---
+
 ## 💻 Usage Examples
 
 ### Basic Form
@@ -469,23 +533,36 @@ function StatsCard() {
 }
 ```
 
-### Button Group
+### Button Variants
 
 ```tsx
 import { LiveMenuButton } from 'livemenu-ui';
 
 function ActionButtons() {
   return (
-    <div className="flex gap-2">
-      <LiveMenuButton variant="primary" size="md">
-        Save
-      </LiveMenuButton>
-      <LiveMenuButton variant="outline" size="md">
-        Cancel
-      </LiveMenuButton>
-      <LiveMenuButton variant="danger" size="md">
-        Delete
-      </LiveMenuButton>
+    <div className="space-y-4">
+      {/* Solid Buttons */}
+      <div className="flex gap-2">
+        <LiveMenuButton variant="primary" size="md">
+          Save
+        </LiveMenuButton>
+        <LiveMenuButton variant="outline" size="md">
+          Cancel
+        </LiveMenuButton>
+        <LiveMenuButton variant="danger" size="md">
+          Delete
+        </LiveMenuButton>
+      </div>
+
+      {/* Text Buttons */}
+      <div className="flex gap-4">
+        <LiveMenuButton variant="text">
+          Learn More
+        </LiveMenuButton>
+        <LiveMenuButton variant="text" onClick={() => window.history.back()}>
+          Go Back
+        </LiveMenuButton>
+      </div>
     </div>
   );
 }
@@ -505,12 +582,12 @@ All components and classes follow the **LiveMenu prefix** pattern:
 
 ### Custom Classes
 
-The library provides 44+ custom Tailwind classes:
+The library provides 45+ custom Tailwind classes:
 
 ```css
 /* Buttons */
 livemenu-btn, livemenu-btn-primary, livemenu-btn-secondary
-livemenu-btn-outline, livemenu-btn-light, livemenu-btn-dark
+livemenu-btn-outline, livemenu-btn-light, livemenu-btn-dark, livemenu-btn-text
 livemenu-btn-sm, livemenu-btn-md, livemenu-btn-lg
 
 /* Cards */
@@ -571,6 +648,7 @@ npm run watch
 |--------|-------------|
 | `npm run build` | Build the library for production |
 | `npm run watch` | Build in watch mode for development |
+| `npm run prepare` | Runs automatically when installing from GitHub |
 | `npm run prepublishOnly` | Runs automatically before publishing |
 
 ### Project Structure
@@ -771,19 +849,21 @@ When adding new components or features:
 
 | Property | Value |
 |----------|-------|
-| **Name** | livemenu-ui |
+| **Name** | @codearemo/livemenu-ui |
 | **Version** | 1.0.0 |
 | **Type** | ES Module |
 | **Main (CJS)** | dist/index.js |
 | **Module (ESM)** | dist/index.esm.js |
 | **Types** | dist/types/index.d.ts |
 | **Styles** | dist/styles.css |
+| **React Support** | 18.x, 19.x |
+| **Bundler Support** | Vite, Webpack, Rollup, Next.js |
 
 ### Bundle Size
 
-- **JS (CJS):** ~4KB (minified)
-- **JS (ESM):** ~4KB (minified)
-- **CSS:** ~35KB (minified, includes all Tailwind classes)
+- **JS (CJS):** ~32KB (minified)
+- **JS (ESM):** ~32KB (minified)
+- **CSS:** ~63KB (minified, includes all Tailwind classes)
 
 ### Browser Support
 
