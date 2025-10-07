@@ -31,3 +31,6 @@ export * from './Textarea';
 // Export all Switch components and types
 export * from './Switch';
 
+// Export all Modal components and types
+export * from './Modal';
+

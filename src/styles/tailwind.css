@@ -375,5 +375,36 @@
     @apply bg-white border border-gray-200 shadow-md;
     @apply dark:bg-dark-bg-tertiary dark:border-dark-border dark:shadow-xl;
   }
+
+  /* Modal Styles */
+  .livemenu-modal-overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center;
+    @apply bg-black/50 backdrop-blur-sm;
+    @apply transition-opacity duration-300 ease-in-out;
+  }
+
+  .livemenu-modal-content {
+    @apply relative bg-white rounded-lg shadow-xl;
+    @apply transform transition-all duration-300 ease-in-out;
+    @apply dark:bg-dark-bg-secondary dark:border dark:border-dark-border;
+  }
+}
+
+@layer utilities {
+  /* Modal Animation */
+  @keyframes modal-enter {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  .animate-modal-enter {
+    animation: modal-enter 0.3s ease-out;
+  }
 }
 

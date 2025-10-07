@@ -12,7 +12,7 @@ export interface LiveMenuButtonProps extends React.ButtonHTMLAttributes<HTMLButt
   /**
    * Button variant style
    */
-  variant?: 'primary' | 'secondary' | 'outline' | 'light' | 'dark' | 'success' | 'danger';
+  variant?: 'primary' | 'secondary' | 'outline' | 'light' | 'dark' | 'success' | 'danger' | 'warning';
   /**
    * Button size
    */
@@ -63,6 +63,7 @@ export const LiveMenuButton: React.FC<LiveMenuButtonProps> = ({
     dark: 'livemenu-btn-dark',
     success: 'livemenu-btn-primary bg-success hover:bg-success-600 active:bg-success-700 focus:ring-success',
     danger: 'livemenu-btn-primary bg-danger hover:bg-danger-600 active:bg-danger-700 focus:ring-danger',
+    warning: 'livemenu-btn-primary bg-warning hover:bg-warning-600 active:bg-warning-700 focus:ring-warning text-gray-900',
   };
   
   // Size classes mapping

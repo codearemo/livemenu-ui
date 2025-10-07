@@ -300,6 +300,64 @@ Additional form components for complete form building.
 
 ---
 
+### LiveMenuModal
+
+A powerful modal system with programmatic triggering and stacking support.
+
+**Key Features:**
+- Programmatic triggering from anywhere
+- Multiple modals stacked on each other
+- 5 size options (sm, md, lg, xl, full)
+- Dismissable/non-dismissable options
+- Full keyboard and accessibility support
+- Auto focus management
+
+**Quick Example:**
+```tsx
+import { showModal, useModal, LiveMenuModalProvider } from 'livemenu-ui';
+
+// Wrap your app
+<LiveMenuModalProvider>
+  <App />
+</LiveMenuModalProvider>
+
+// Trigger modals programmatically
+showModal(MyModalContent, {
+  size: 'md',
+  dismissable: true,
+  showCloseButton: true,
+  props: {
+    title: 'Hello',
+    onConfirm: () => console.log('Confirmed!')
+  }
+});
+
+// Or use the hook in components
+const { showModal, hideModal } = useModal();
+```
+
+[📚 View modal documentation →](docs/components/modal.md)  
+[📚 View complete modal examples →](docs/examples/MODAL_EXAMPLES.md)
+
+**Confirm Dialog Hook:**
+```tsx
+import { useConfirm } from 'livemenu-ui';
+
+const { confirm } = useConfirm();
+
+confirm({
+  title: 'Delete Item',
+  message: 'Are you sure?',
+  variant: 'danger',
+  confirmText: 'Delete',
+  onConfirm: () => deleteItem()
+});
+```
+
+[📚 View confirm documentation →](docs/components/confirm.md)
+
+---
+
 ## 💻 Usage Examples
 
 ### Basic Form
