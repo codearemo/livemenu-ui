@@ -12,7 +12,7 @@ export interface LiveMenuButtonProps extends React.ButtonHTMLAttributes<HTMLButt
   /**
    * Button variant style
    */
-  variant?: 'primary' | 'secondary' | 'outline' | 'light' | 'dark' | 'success' | 'danger' | 'warning';
+  variant?: 'primary' | 'secondary' | 'outline' | 'light' | 'dark' | 'success' | 'danger' | 'warning' | 'text';
   /**
    * Button size
    */
@@ -51,8 +51,8 @@ export const LiveMenuButton: React.FC<LiveMenuButtonProps> = ({
   className = '',
   ...props
 }) => {
-  // Base button class
-  const baseClass = 'livemenu-btn';
+  // Base button class (not used for text variant)
+  const baseClass = variant === 'text' ? '' : 'livemenu-btn';
   
   // Variant classes mapping
   const variantClasses: Record<NonNullable<LiveMenuButtonProps['variant']>, string> = {
@@ -64,9 +64,10 @@ export const LiveMenuButton: React.FC<LiveMenuButtonProps> = ({
     success: 'livemenu-btn-primary bg-success hover:bg-success-600 active:bg-success-700 focus:ring-success',
     danger: 'livemenu-btn-primary bg-danger hover:bg-danger-600 active:bg-danger-700 focus:ring-danger',
     warning: 'livemenu-btn-primary bg-warning hover:bg-warning-600 active:bg-warning-700 focus:ring-warning text-gray-900',
+    text: 'livemenu-btn-text',
   };
   
-  // Size classes mapping
+  // Size classes mapping (not used for text variant as it has its own sizing)
   const sizeClasses: Record<NonNullable<LiveMenuButtonProps['size']>, string> = {
     sm: 'livemenu-btn-sm',
     md: 'livemenu-btn-md',
@@ -80,7 +81,7 @@ export const LiveMenuButton: React.FC<LiveMenuButtonProps> = ({
   const buttonClasses = [
     baseClass,
     variantClasses[variant],
-    sizeClasses[size],
+    variant !== 'text' && sizeClasses[size], // Don't add size class for text variant
     fullWidthClass,
     className,
   ]

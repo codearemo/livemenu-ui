@@ -66,6 +66,18 @@
     @apply dark:bg-livemenu-darker dark:hover:bg-livemenu-dark;
   }
 
+  .livemenu-btn-text {
+    @apply inline-flex items-center justify-center font-medium transition-all duration-200 ease-in-out;
+    @apply bg-transparent border-none text-livemenu shadow-none;
+    @apply hover:text-livemenu-hover hover:underline;
+    @apply active:text-livemenu-active;
+    @apply focus:outline-none focus:ring-0;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed disabled:no-underline;
+    @apply px-2 py-1;
+    /* Dark mode: maintain orange color */
+    @apply dark:text-livemenu dark:hover:text-livemenu-hover;
+  }
+
   /* Button Sizes */
   .livemenu-btn-sm {
     @apply px-3 py-1.5 text-sm;
