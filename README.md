@@ -41,13 +41,16 @@ LiveMenu UI is a comprehensive React component library built with TypeScript and
 
 ```bash
 # Using npm
-npm install git+https://github.com/YOUR_ORG/livemenu-ui.git
+npm install git+https://github.com/codearemo/livemenu-ui.git
 
 # Using yarn
-yarn add git+https://github.com/YOUR_ORG/livemenu-ui.git
+yarn add git+https://github.com/codearemo/livemenu-ui.git
 
 # Using pnpm
-pnpm add git+https://github.com/YOUR_ORG/livemenu-ui.git
+pnpm add git+https://github.com/codearemo/livemenu-ui.git
+
+# Or from GitHub Packages (after publishing)
+npm install @codearemo/livemenu-ui
 ```
 
 ### From Local Development
@@ -715,7 +718,7 @@ Built with:
 
 **Made with ❤️ by the LiveMenu Team**
 
-[Report Bug](https://github.com/YOUR_ORG/livemenu-ui/issues) • [Request Feature](https://github.com/YOUR_ORG/livemenu-ui/issues)
+[Report Bug](https://github.com/codearemo/livemenu-ui/issues) • [Request Feature](https://github.com/codearemo/livemenu-ui/issues)
 
 </div>
 

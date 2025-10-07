@@ -4,7 +4,7 @@
 
 ### 1. Update Configuration Files
 
-Replace `YOUR_USERNAME` with your GitHub username in:
+Replace `codearemo` with your GitHub username in:
 
 - [ ] `package.json` → `"name": "@yourusername/livemenu-ui"`
 - [ ] `package.json` → `"repository.url"`

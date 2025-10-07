@@ -1,5 +1,5 @@
 {
-  "name": "@YOUR_USERNAME/livemenu-ui",
+  "name": "@codearemo/livemenu-ui",
   "version": "1.0.0",
   "description": "A React component library for LiveMenu",
   "private": false,
@@ -20,12 +20,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YOUR_USERNAME/livemenu-ui.git"
+    "url": "git+https://github.com/codearemo/livemenu-ui.git"
   },
   "bugs": {
-    "url": "https://github.com/YOUR_USERNAME/livemenu-ui/issues"
+    "url": "https://github.com/codearemo/livemenu-ui/issues"
   },
-  "homepage": "https://github.com/YOUR_USERNAME/livemenu-ui#readme",
+  "homepage": "https://github.com/codearemo/livemenu-ui#readme",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com",
     "access": "restricted"
@@ -45,8 +45,7 @@
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^25.0.8",
-    "@rollup/plugin-node-resolve": "^15.3.1",
+    "@rollup/plugin-commonjs": "^25.0.8",    "@rollup/plugin-node-resolve": "^15.3.1",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
     "@types/react": "^18.3.26",

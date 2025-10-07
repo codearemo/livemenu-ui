@@ -24,20 +24,20 @@ Comprehensive guide for implementing dark mode in your application using LiveMen
 ### Step 1: Install LiveMenu UI
 
 ```bash
-npm install @YOUR_USERNAME/livemenu-ui
+npm install @codearemo/livemenu-ui
 ```
 
 ### Step 2: Import Styles
 
 ```tsx
 // src/App.tsx or src/main.tsx
-import '@YOUR_USERNAME/livemenu-ui/dist/styles.css';
+import '@codearemo/livemenu-ui/dist/styles.css';
 ```
 
 ### Step 3: Wrap App with ThemeProvider
 
 ```tsx
-import { LiveMenuThemeProvider } from '@YOUR_USERNAME/livemenu-ui';
+import { LiveMenuThemeProvider } from '@codearemo/livemenu-ui';
 
 function App() {
   return (
@@ -53,7 +53,7 @@ export default App;
 ### Step 4: Add Theme Toggle (Optional)
 
 ```tsx
-import { LiveMenuThemeToggle } from '@YOUR_USERNAME/livemenu-ui';
+import { LiveMenuThemeToggle } from '@codearemo/livemenu-ui';
 
 function Header() {
   return (
@@ -606,8 +606,8 @@ import {
   LiveMenuButton,
   LiveMenuInput,
   LiveMenuBadge,
-} from '@YOUR_USERNAME/livemenu-ui';
-import '@YOUR_USERNAME/livemenu-ui/dist/styles.css';
+} from '@codearemo/livemenu-ui';
+import '@codearemo/livemenu-ui/dist/styles.css';
 
 // Header Component
 function AppHeader() {
@@ -1107,5 +1107,5 @@ When building your app:
 
 **Your app now has professional dark mode support!** 🌙✨
 
-For questions or issues, open an issue on the [GitHub repository](https://github.com/YOUR_USERNAME/livemenu-ui/issues).
+For questions or issues, open an issue on the [GitHub repository](https://github.com/codearemo/livemenu-ui/issues).
 

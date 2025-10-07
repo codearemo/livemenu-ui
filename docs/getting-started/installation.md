@@ -16,13 +16,13 @@ Create or edit `.npmrc` in your project directory:
 
 ```ini
 # GitHub Packages configuration
-@YOUR_USERNAME:registry=https://npm.pkg.github.com
+@codearemo:registry=https://npm.pkg.github.com
 
 # Use npm registry for all other packages
 registry=https://registry.npmjs.org/
 ```
 
-**Replace `YOUR_USERNAME`** with the actual GitHub username or organization.
+**Replace `codearemo`** with the actual GitHub username or organization.
 
 #### Add Authentication Token
 
@@ -65,13 +65,13 @@ export GITHUB_TOKEN="your_token_here"
 
 ```bash
 # Using npm
-npm install @YOUR_USERNAME/livemenu-ui
+npm install @codearemo/livemenu-ui
 
 # Using yarn
-yarn add @YOUR_USERNAME/livemenu-ui
+yarn add @codearemo/livemenu-ui
 
 # Using pnpm
-pnpm add @YOUR_USERNAME/livemenu-ui
+pnpm add @codearemo/livemenu-ui
 ```
 
 ### Step 3: Install Peer Dependencies
@@ -111,7 +111,7 @@ module.exports = {
     './app/**/*.{js,jsx,ts,tsx}',
     
     // 👇 Add this line to include LiveMenu UI components
-    './node_modules/@YOUR_USERNAME/livemenu-ui/dist/**/*.{js,jsx}',
+    './node_modules/@codearemo/livemenu-ui/dist/**/*.{js,jsx}',
   ],
   theme: {
     extend: {
@@ -221,7 +221,7 @@ module.exports = {
 };
 ```
 
-**Replace `@YOUR_USERNAME`** with the actual scope.
+**Replace `@codearemo`** with the actual scope.
 
 #### Minimal Configuration (Quick Start)
 
@@ -232,7 +232,7 @@ module.exports = {
   content: [
     './src/**/*.{js,jsx,ts,tsx}',
     // Add LiveMenu UI
-    './node_modules/@YOUR_USERNAME/livemenu-ui/dist/**/*.{js,jsx}',
+    './node_modules/@codearemo/livemenu-ui/dist/**/*.{js,jsx}',
   ],
   theme: {
     extend: {
@@ -260,7 +260,7 @@ module.exports = {
 
 ```tsx
 // Import the CSS styles (required)
-import '@YOUR_USERNAME/livemenu-ui/dist/styles.css';
+import '@codearemo/livemenu-ui/dist/styles.css';
 
 // Import components
 import { 
@@ -268,13 +268,13 @@ import {
   LiveMenuCard, 
   LiveMenuBadge, 
   LiveMenuInput 
-} from '@YOUR_USERNAME/livemenu-ui';
+} from '@codearemo/livemenu-ui';
 
 // Import types (TypeScript)
 import type { 
   LiveMenuButtonProps,
   LiveMenuCardProps 
-} from '@YOUR_USERNAME/livemenu-ui';
+} from '@codearemo/livemenu-ui';
 ```
 
 ### Import Styles in Different Files
@@ -283,7 +283,7 @@ import type {
 
 ```tsx
 // src/App.tsx or src/index.tsx
-import '@YOUR_USERNAME/livemenu-ui/dist/styles.css';
+import '@codearemo/livemenu-ui/dist/styles.css';
 import './index.css'; // Your custom styles
 
 function App() {
@@ -295,7 +295,7 @@ function App() {
 
 ```css
 /* src/index.css */
-@import '@YOUR_USERNAME/livemenu-ui/dist/styles.css';
+@import '@codearemo/livemenu-ui/dist/styles.css';
 
 /* Your custom styles */
 ```
@@ -304,7 +304,7 @@ function App() {
 
 ```tsx
 // pages/_app.tsx
-import '@YOUR_USERNAME/livemenu-ui/dist/styles.css';
+import '@codearemo/livemenu-ui/dist/styles.css';
 import type { AppProps } from 'next/app';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -319,7 +319,7 @@ export default function App({ Component, pageProps }: AppProps) {
 ### Simple Button
 
 ```tsx
-import { LiveMenuButton } from '@YOUR_USERNAME/livemenu-ui';
+import { LiveMenuButton } from '@codearemo/livemenu-ui';
 
 function MyComponent() {
   return (
@@ -339,8 +339,8 @@ import {
   LiveMenuInput,
   LiveMenuButton,
   LiveMenuBadge,
-} from '@YOUR_USERNAME/livemenu-ui';
-import '@YOUR_USERNAME/livemenu-ui/dist/styles.css';
+} from '@codearemo/livemenu-ui';
+import '@codearemo/livemenu-ui/dist/styles.css';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
@@ -470,8 +470,8 @@ import {
   LiveMenuCard,
   LiveMenuBadge,
   LiveMenuButton,
-} from '@YOUR_USERNAME/livemenu-ui';
-import '@YOUR_USERNAME/livemenu-ui/dist/styles.css';
+} from '@codearemo/livemenu-ui';
+import '@codearemo/livemenu-ui/dist/styles.css';
 
 function Dashboard() {
   const stats = [
@@ -588,8 +588,8 @@ import {
   LiveMenuButton,
   LiveMenuBadge,
   LiveMenuCard,
-} from '@YOUR_USERNAME/livemenu-ui';
-import '@YOUR_USERNAME/livemenu-ui/dist/styles.css';
+} from '@codearemo/livemenu-ui';
+import '@codearemo/livemenu-ui/dist/styles.css';
 
 function ProductSearch() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -687,7 +687,7 @@ export default ProductSearch;
 
 ```tsx
 // app/layout.tsx
-import '@YOUR_USERNAME/livemenu-ui/dist/styles.css';
+import '@codearemo/livemenu-ui/dist/styles.css';
 import './globals.css';
 
 export default function RootLayout({
@@ -707,7 +707,7 @@ export default function RootLayout({
 // app/page.tsx
 'use client';
 
-import { LiveMenuButton } from '@YOUR_USERNAME/livemenu-ui';
+import { LiveMenuButton } from '@codearemo/livemenu-ui';
 
 export default function Home() {
   return (
@@ -726,7 +726,7 @@ export default function Home() {
 // src/main.tsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import '@YOUR_USERNAME/livemenu-ui/dist/styles.css';
+import '@codearemo/livemenu-ui/dist/styles.css';
 import './index.css';
 import App from './App';
 
@@ -743,7 +743,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 // src/index.tsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import '@YOUR_USERNAME/livemenu-ui/dist/styles.css';
+import '@codearemo/livemenu-ui/dist/styles.css';
 import './index.css';
 import App from './App';
 
@@ -769,7 +769,7 @@ import type {
   LiveMenuCardProps,
   LiveMenuBadgeProps,
   LiveMenuInputProps,
-} from '@YOUR_USERNAME/livemenu-ui';
+} from '@codearemo/livemenu-ui';
 
 // Type-safe component
 const MyButton: React.FC<LiveMenuButtonProps> = (props) => {
@@ -815,7 +815,7 @@ You can override LiveMenu UI styles with your own CSS:
 Import after LiveMenu UI styles:
 
 ```tsx
-import '@YOUR_USERNAME/livemenu-ui/dist/styles.css';
+import '@codearemo/livemenu-ui/dist/styles.css';
 import './custom-livemenu.css'; // Your overrides
 ```
 
@@ -841,7 +841,7 @@ import './custom-livemenu.css'; // Your overrides
 **Solution:**
 ```tsx
 // Make sure you import the CSS
-import '@YOUR_USERNAME/livemenu-ui/dist/styles.css';
+import '@codearemo/livemenu-ui/dist/styles.css';
 ```
 
 ### Tailwind Classes Not Working
@@ -851,18 +851,18 @@ import '@YOUR_USERNAME/livemenu-ui/dist/styles.css';
 **Solution:** Ensure `tailwind.config.js` includes the package:
 ```javascript
 content: [
-  './node_modules/@YOUR_USERNAME/livemenu-ui/dist/**/*.{js,jsx}',
+  './node_modules/@codearemo/livemenu-ui/dist/**/*.{js,jsx}',
 ]
 ```
 
 ### Cannot Find Module
 
-**Problem:** `Cannot find module '@YOUR_USERNAME/livemenu-ui'`
+**Problem:** `Cannot find module '@codearemo/livemenu-ui'`
 
 **Solution:**
 1. Verify `.npmrc` is configured
 2. Check authentication token
-3. Run `npm install @YOUR_USERNAME/livemenu-ui` again
+3. Run `npm install @codearemo/livemenu-ui` again
 
 ### Authentication Error
 
@@ -886,5 +886,5 @@ content: [
 
 ---
 
-**Need Help?** Open an issue on the [GitHub repository](https://github.com/YOUR_USERNAME/livemenu-ui/issues).
+**Need Help?** Open an issue on the [GitHub repository](https://github.com/codearemo/livemenu-ui/issues).
 

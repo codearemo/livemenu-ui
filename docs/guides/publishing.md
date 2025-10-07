@@ -23,7 +23,7 @@ The package.json has been configured with:
 
 ```json
 {
-  "name": "@YOUR_USERNAME/livemenu-ui",
+  "name": "@codearemo/livemenu-ui",
   "private": false,
   "publishConfig": {
     "registry": "https://npm.pkg.github.com",
@@ -31,14 +31,14 @@ The package.json has been configured with:
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YOUR_USERNAME/livemenu-ui.git"
+    "url": "git+https://github.com/codearemo/livemenu-ui.git"
   }
 }
 ```
 
 **Important Changes to Make:**
 
-1. Replace `@YOUR_USERNAME` with your GitHub username or organization name:
+1. Replace `@codearemo` with your GitHub username or organization name:
    ```json
    "name": "@yourusername/livemenu-ui"
    ```
@@ -60,7 +60,7 @@ A `.npmrc` file has been created in the project root:
 
 ```ini
 # GitHub Packages Registry Configuration
-@YOUR_USERNAME:registry=https://npm.pkg.github.com
+@codearemo:registry=https://npm.pkg.github.com
 registry=https://registry.npmjs.org/
 ```
 
@@ -227,7 +227,7 @@ npm notice total files:   XX
 
 Or visit:
 ```
-https://github.com/YOUR_USERNAME/livemenu-ui/packages
+https://github.com/codearemo/livemenu-ui/packages
 ```
 
 ---
@@ -487,5 +487,5 @@ Before each publish:
 
 ---
 
-**Need help?** Open an issue on the [GitHub repository](https://github.com/YOUR_USERNAME/livemenu-ui/issues).
+**Need help?** Open an issue on the [GitHub repository](https://github.com/codearemo/livemenu-ui/issues).
 

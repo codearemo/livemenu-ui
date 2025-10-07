@@ -22,7 +22,7 @@ Complete guide for developing, testing, and releasing the LiveMenu UI component 
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/livemenu-ui.git
+git clone https://github.com/codearemo/livemenu-ui.git
 cd livemenu-ui
 
 # Install dependencies
@@ -172,7 +172,7 @@ In the **livemenu-ui directory**:
 npm link
 
 # Output:
-# /usr/local/lib/node_modules/@YOUR_USERNAME/livemenu-ui -> /path/to/livemenu-ui
+# /usr/local/lib/node_modules/@codearemo/livemenu-ui -> /path/to/livemenu-ui
 ```
 
 Verify:
@@ -200,16 +200,16 @@ In the **test app directory**:
 
 ```bash
 # Link the livemenu-ui package
-npm link @YOUR_USERNAME/livemenu-ui
+npm link @codearemo/livemenu-ui
 
 # Output:
-# /path/to/test-app/node_modules/@YOUR_USERNAME/livemenu-ui -> /usr/local/lib/node_modules/@YOUR_USERNAME/livemenu-ui -> /path/to/livemenu-ui
+# /path/to/test-app/node_modules/@codearemo/livemenu-ui -> /usr/local/lib/node_modules/@codearemo/livemenu-ui -> /path/to/livemenu-ui
 ```
 
 Verify:
 ```bash
 # Check if linked correctly
-ls -la node_modules/@YOUR_USERNAME/
+ls -la node_modules/@codearemo/
 ```
 
 #### 4. Use in Test App
@@ -217,13 +217,13 @@ ls -la node_modules/@YOUR_USERNAME/
 ```tsx
 // src/App.tsx
 import React, { useState } from 'react';
-import '@YOUR_USERNAME/livemenu-ui/dist/styles.css';
+import '@codearemo/livemenu-ui/dist/styles.css';
 import {
   LiveMenuButton,
   LiveMenuCard,
   LiveMenuInput,
   LiveMenuBadge,
-} from '@YOUR_USERNAME/livemenu-ui';
+} from '@codearemo/livemenu-ui';
 
 function App() {
   const [email, setEmail] = useState('');
@@ -277,10 +277,10 @@ npm run dev  # for Vite
 In the **test app directory**:
 ```bash
 # Unlink the package
-npm unlink @YOUR_USERNAME/livemenu-ui
+npm unlink @codearemo/livemenu-ui
 
 # Reinstall from registry (if needed)
-npm install @YOUR_USERNAME/livemenu-ui
+npm install @codearemo/livemenu-ui
 ```
 
 In the **livemenu-ui directory**:
@@ -288,7 +288,7 @@ In the **livemenu-ui directory**:
 # Remove global symlink
 npm unlink
 # or
-npm unlink -g @YOUR_USERNAME/livemenu-ui
+npm unlink -g @codearemo/livemenu-ui
 ```
 
 ### Troubleshooting npm link
@@ -302,7 +302,7 @@ npm run watch
 
 # 2. Check if link is correct
 cd test-app
-ls -la node_modules/@YOUR_USERNAME/livemenu-ui
+ls -la node_modules/@codearemo/livemenu-ui
 
 # 3. Force rebuild
 cd livemenu-ui
@@ -437,7 +437,7 @@ npm run build
 # Test locally
 npm link
 cd ../test-app
-npm link @YOUR_USERNAME/livemenu-ui
+npm link @codearemo/livemenu-ui
 # Test components...
 ```
 
@@ -508,14 +508,14 @@ npm whoami --registry=https://npm.pkg.github.com
 npm publish
 
 # Output:
-# + @YOUR_USERNAME/livemenu-ui@1.0.1
+# + @codearemo/livemenu-ui@1.0.1
 ```
 
 #### 6. Create GitHub Release (Recommended)
 
 **Option A: Via GitHub UI**
 
-1. Go to: https://github.com/YOUR_USERNAME/livemenu-ui/releases
+1. Go to: https://github.com/codearemo/livemenu-ui/releases
 2. Click "Create a new release"
 3. Select the tag (`v1.0.1`)
 4. Release title: `v1.0.1`
@@ -542,14 +542,14 @@ gh release create v1.0.1 \
 
 ```bash
 # Check GitHub Packages
-# Visit: https://github.com/YOUR_USERNAME/livemenu-ui/packages
+# Visit: https://github.com/codearemo/livemenu-ui/packages
 
 # Test installation in a new project
 mkdir test-install
 cd test-install
 npm init -y
-npm install @YOUR_USERNAME/livemenu-ui
-ls node_modules/@YOUR_USERNAME/livemenu-ui
+npm install @codearemo/livemenu-ui
+ls node_modules/@codearemo/livemenu-ui
 ```
 
 ### Automated Release (GitHub Actions)
@@ -637,7 +637,7 @@ npm run build
 # 3. Test in real application
 npm link
 cd ../test-app
-npm link @YOUR_USERNAME/livemenu-ui
+npm link @codearemo/livemenu-ui
 # Test thoroughly...
 
 # 4. Update version
@@ -692,18 +692,18 @@ npm install
 
 ```bash
 # Verify link
-ls -la test-app/node_modules/@YOUR_USERNAME/
+ls -la test-app/node_modules/@codearemo/
 
 # Re-link
-npm unlink @YOUR_USERNAME/livemenu-ui
-npm link @YOUR_USERNAME/livemenu-ui
+npm unlink @codearemo/livemenu-ui
+npm link @codearemo/livemenu-ui
 ```
 
 **Problem: Styles not loading**
 
 ```tsx
 // Ensure styles are imported
-import '@YOUR_USERNAME/livemenu-ui/dist/styles.css';
+import '@codearemo/livemenu-ui/dist/styles.css';
 ```
 
 ### Publishing Issues
@@ -722,7 +722,7 @@ npm whoami --registry=https://npm.pkg.github.com
 
 ```bash
 # Wait a few minutes (GitHub Packages can be slow)
-# Verify at: https://github.com/YOUR_USERNAME/livemenu-ui/packages
+# Verify at: https://github.com/codearemo/livemenu-ui/packages
 
 # Check package name matches
 cat package.json | grep "name"
