@@ -358,6 +358,48 @@ confirm({
 
 ---
 
+### LiveMenuToast
+
+A complete notification/toast system with multiple variants and stacking support.
+
+**Key Features:**
+- 5 variants: success, error, warning, info, default
+- 6 positions: top-right, top-left, top-center, bottom-right, bottom-left, bottom-center
+- Multiple toasts stacking
+- Auto-dismiss with progress bar
+- Action button support
+- Programmatic API
+
+**Quick Example:**
+```tsx
+import { LiveMenuToastProvider, showSuccessToast, useToast } from 'livemenu-ui';
+
+// Wrap your app
+<LiveMenuToastProvider>
+  <App />
+</LiveMenuToastProvider>
+
+// Use anywhere
+showSuccessToast('Saved successfully!');
+showErrorToast('Failed to save');
+
+// Or with hook
+const { showToast } = useToast();
+showToast('Hello!', {
+  variant: 'success',
+  duration: 3000,
+  position: 'top-right',
+  action: {
+    label: 'Undo',
+    onClick: () => console.log('Undo!')
+  }
+});
+```
+
+[📚 View toast documentation →](docs/components/toast.md)
+
+---
+
 ## 💻 Usage Examples
 
 ### Basic Form

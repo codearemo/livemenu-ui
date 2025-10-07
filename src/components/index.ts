@@ -34,3 +34,6 @@ export * from './Switch';
 // Export all Modal components and types
 export * from './Modal';
 
+// Export all Toast components and types
+export * from './Toast';
+
