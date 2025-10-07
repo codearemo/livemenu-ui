@@ -37,3 +37,6 @@ export * from './Modal';
 // Export all Toast components and types
 export * from './Toast';
 
+// Export all LoaderWrapper components and types
+export * from './LoaderWrapper';
+
