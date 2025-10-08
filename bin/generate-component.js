@@ -221,8 +221,7 @@ export abstract class ${className}LocalDataSource {
 
 function generateLocalDataSourceImpl(moduleName) {
   const className = toPascalCase(moduleName);
-  return `import * as SecureStore from "expo-secure-store";
-import { GeneralRequestModel, GeneralResponseModel } from "@/src/core/api/http-types";
+  return `import { GeneralRequestModel, GeneralResponseModel } from "@/src/core/api/http-types";
 import { ${className}LocalDataSource } from "./${moduleName}-local-datasource";
 
 export class ${className}LocalDataSourceImpl implements ${className}LocalDataSource {
