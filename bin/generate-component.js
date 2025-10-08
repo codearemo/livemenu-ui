@@ -116,25 +116,22 @@ function createDirectoryStructure(basePath, structure) {
 
 function generateRemoteDataSource(moduleName) {
   const className = toPascalCase(moduleName);
-  return `import { GeneralRequestModel, GeneralResponseModel } from "@/src/core/api/http-types";
-
-export abstract class ${className}RemoteDataSource {
+  return `export abstract class ${className}RemoteDataSource {
   // Add your remote data source methods here
   // Example:
-  // abstract getData(payload: GeneralRequestModel<unknown, unknown, unknown>): Promise<GeneralResponseModel<unknown>>;
+  // abstract getData(payload: unknown): Promise<unknown>;
 }
 `;
 }
 
 function generateRemoteDataSourceImpl(moduleName) {
   const className = toPascalCase(moduleName);
-  return `import { GeneralRequestModel, GeneralResponseModel } from "@/src/core/api/http-types";
-import { ${className}RemoteDataSource } from "./${moduleName}-remote-datasource";
+  return `import { ${className}RemoteDataSource } from "./${moduleName}-remote-datasource";
 
 export class ${className}RemoteDataSourceImpl implements ${className}RemoteDataSource {
   // Implement your remote data source methods here
   // Example:
-  // async getData(payload: GeneralRequestModel<unknown, unknown, unknown>): Promise<GeneralResponseModel<unknown>> {
+  // async getData(payload: unknown): Promise<unknown> {
   //   // Implementation here
   //   throw new Error("Method not implemented.");
   // }
@@ -144,8 +141,7 @@ export class ${className}RemoteDataSourceImpl implements ${className}RemoteDataS
 
 function generateRemoteRepoImpl(moduleName) {
   const className = toPascalCase(moduleName);
-  return `import { GeneralRequestModel, GeneralResponseModel } from "@/src/core/api/http-types";
-import { ${className}Repo } from "../domain/${moduleName}-repo";
+  return `import { ${className}Repo } from "../domain/${moduleName}-repo";
 import { ${className}RemoteDataSourceImpl } from "./remote/${moduleName}-remote-datasource-impl";
 
 export class ${className}RepoImpl implements ${className}Repo {
@@ -153,7 +149,7 @@ export class ${className}RepoImpl implements ${className}Repo {
 
   // Implement your repository methods here
   // Example:
-  // async getData(payload: GeneralRequestModel<unknown, unknown, unknown>): Promise<GeneralResponseModel<unknown>> {
+  // async getData(payload: unknown): Promise<unknown> {
   //   try {
   //     return await this.remoteDatasource.getData(payload);
   //   } catch (error) {
@@ -167,29 +163,26 @@ export class ${className}RepoImpl implements ${className}Repo {
 
 function generateRepo(moduleName) {
   const className = toPascalCase(moduleName);
-  return `import { GeneralRequestModel, GeneralResponseModel } from "@/src/core/api/http-types";
-
-export abstract class ${className}Repo {
+  return `export abstract class ${className}Repo {
   // Add your repository methods here
   // Example:
-  // abstract getData(payload: GeneralRequestModel<unknown, unknown, unknown>): Promise<GeneralResponseModel<unknown>>;
+  // abstract getData(payload: unknown): Promise<unknown>;
 }
 `;
 }
 
 function generateUsecases(moduleName) {
   const className = toPascalCase(moduleName);
-  return `import { GeneralRequestModel, GeneralResponseModel } from "@/src/core/api/http-types";
-import { ${className}RepoImpl } from "../../data/${moduleName}-repo-impl";
+  return `import { ${className}RepoImpl } from "../../data/${moduleName}-repo-impl";
 
 export class ${className}Usecases {
   private readonly repo = new ${className}RepoImpl();
 
   // Add your use case methods here
   // Example:
-  // async executeGetData(payload: GeneralRequestModel<unknown, unknown, unknown>): Promise<GeneralResponseModel<unknown>> {
+  // async executeGetData(payload: unknown): Promise<unknown> {
   //   // Validate input parameters
-  //   this.validateGetDataParams(payload.body);
+  //   this.validateGetDataParams(payload);
   //   
   //   return this.repo.getData(payload);
   // }
@@ -207,9 +200,7 @@ export class ${className}Usecases {
 
 function generateLocalDataSource(moduleName) {
   const className = toPascalCase(moduleName);
-  return `import { GeneralRequestModel, GeneralResponseModel } from "@/src/core/api/http-types";
-
-export abstract class ${className}LocalDataSource {
+  return `export abstract class ${className}LocalDataSource {
   // Add your local data source methods here
   // Example:
   // abstract getCachedData(key: string): Promise<unknown>;
@@ -221,8 +212,7 @@ export abstract class ${className}LocalDataSource {
 
 function generateLocalDataSourceImpl(moduleName) {
   const className = toPascalCase(moduleName);
-  return `import { GeneralRequestModel, GeneralResponseModel } from "@/src/core/api/http-types";
-import { ${className}LocalDataSource } from "./${moduleName}-local-datasource";
+  return `import { ${className}LocalDataSource } from "./${moduleName}-local-datasource";
 
 export class ${className}LocalDataSourceImpl implements ${className}LocalDataSource {
   // Implement your local data source methods here
@@ -303,20 +293,15 @@ export default ${moduleName}Slice.reducer;
 
 function generateHook(moduleName) {
   const className = toPascalCase(moduleName);
-  return `import { GeneralRequestModel, GeneralResponseModel } from "@/src/core/api/http-types";
-import { ${className}Usecases } from "../../domain/usecases/${moduleName}-usecases";
+  return `import { ${className}Usecases } from "../../domain/usecases/${moduleName}-usecases";
 
 const use${className} = () => {
   return {
     // Add your hook methods here
     // Example:
-    // getData: async (payload: unknown): Promise<GeneralResponseModel<unknown>> => {
+    // getData: async (payload: unknown): Promise<unknown> => {
     //   const usecase = new ${className}Usecases();
-    //   const response = await usecase.executeGetData({
-    //     body: payload,
-    //     params: null,
-    //     extra: null,
-    //   });
+    //   const response = await usecase.executeGetData(payload);
     //   return response;
     // },
   };
