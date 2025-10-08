@@ -34,7 +34,7 @@ LiveMenu UI is a comprehensive React component library built with TypeScript and
 🚀 **Production Ready** - Minified, optimized, and tested  
 🌗 **Dark Mode** - Built-in dark mode support with ThemeProvider  
 ⚡ **React 18 & 19** - Compatible with latest React versions  
-🛠️ **Component Generator CLI** - Generate components in your project with `npx livemenu-generate`
+🛠️ **Module Generator CLI** - Generate Clean Architecture modules with `npx livemenu-generate`
 
 ---
 
@@ -174,14 +174,14 @@ import { LiveMenuButton, LiveMenuCard } from 'livemenu-ui';
 
 ### 5. Generate Components (Optional)
 
-🚀 **New!** Generate components in your project using the built-in CLI:
+🚀 **New!** Generate modules in your project using the built-in CLI:
 
 ```bash
-# Generate a component in your project
-npx livemenu-generate RestaurantCard
+# Generate a module in your project
+npx livemenu-generate restaurants
 ```
 
-This creates a ready-to-use component that integrates with LiveMenu UI components!
+This creates a complete **Clean Architecture** module with data/domain/presentation layers!
 
 [📚 See Component Generator Guide →](#-component-generator-cli)
 
@@ -201,54 +201,82 @@ If using TypeScript, ensure your `tsconfig.json` includes:
 
 ---
 
-## 🛠️ Component Generator CLI
+## 🛠️ Module Generator CLI
 
-🚀 **Generate components in your project** using the built-in CLI tool!
+🚀 **Generate Clean Architecture modules in your project** using the built-in CLI tool!
 
-Once you've installed LiveMenu UI, you can generate new components directly in your consuming project:
+Once you've installed LiveMenu UI, you can generate complete modules with data/domain/presentation layers:
 
 ```bash
-npx livemenu-generate RestaurantCard
+npx livemenu-generate restaurants
 ```
 
 ### What Gets Created
 
 ```
-your-project/src/components/RestaurantCard/
-├── RestaurantCard.tsx       # Component implementation
-├── index.ts                 # Exports
-└── RestaurantCard.test.tsx  # Test file
+your-project/src/modules/restaurants/
+├── data/
+│   ├── restaurants-repo-impl.ts
+│   ├── local/
+│   │   ├── restaurants-local-datasource.ts
+│   │   └── restaurants-local-datasource-impl.ts
+│   └── remote/
+│       ├── restaurants-remote-datasource.ts
+│       └── restaurants-remote-datasource-impl.ts
+├── domain/
+│   ├── restaurants-repo.ts
+│   ├── entities/
+│   │   ├── models/          # Add your models here
+│   │   └── params/          # Add your params here
+│   └── usecases/
+│       └── restaurants-usecases.ts
+└── presentation/
+    ├── components/          # Add your components here
+    ├── hooks/
+    │   └── useRestaurants.ts
+    ├── screens/             # Add your screens here
+    └── state/
+        └── restaurants-slice.ts
 ```
 
 ### Quick Examples
 
 ```bash
-# Generate a restaurant card component
-npx livemenu-generate RestaurantCard
+# Generate a restaurants module
+npx livemenu-generate restaurants
 
-# Generate a user profile (kebab-case auto-converts to PascalCase)
+# Generate a user-profile module (kebab-case auto-converts to PascalCase)
 npx livemenu-generate user-profile
 
-# Generate an order history component
-npx livemenu-generate OrderHistory
+# Generate an orders module
+npx livemenu-generate orders
 ```
 
-### Generated Component Uses LiveMenu UI
+### Generated Module Uses Clean Architecture
 
-The generated component is ready to integrate with LiveMenu UI components:
+The generated module follows Clean Architecture principles and integrates with LiveMenu UI:
 
 ```tsx
-import React from 'react';
+// Use the generated hook in your components
+import { useRestaurants } from './modules/restaurants/presentation/hooks/useRestaurants';
 import { LiveMenuCard, LiveMenuButton } from '@codearemo/livemenu-ui';
 
-export const RestaurantCard: React.FC<Props> = ({ restaurant }) => {
+function RestaurantsPage() {
+  const { getRestaurants } = useRestaurants();
+
+  const handleLoad = async () => {
+    const restaurants = await getRestaurants();
+    // Handle restaurants data
+  };
+
   return (
-    <LiveMenuCard title={restaurant.name}>
-      <p>{restaurant.description}</p>
-      <LiveMenuButton variant="primary">View Menu</LiveMenuButton>
+    <LiveMenuCard title="Restaurants">
+      <LiveMenuButton variant="primary" onClick={handleLoad}>
+        Load Restaurants
+      </LiveMenuButton>
     </LiveMenuCard>
   );
-};
+}
 ```
 
 **[📚 Complete Generator Documentation →](GENERATOR_USAGE.md)**

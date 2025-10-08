@@ -1,10 +1,10 @@
-# Component Generator Usage
+# Module Generator Usage
 
-The LiveMenu UI library includes a powerful component generator that works in **any project** where the library is installed!
+The LiveMenu UI library includes a powerful module generator that works in **any project** where the library is installed! It creates **Clean Architecture** modules with data/domain/presentation layers.
 
 ## 🎯 For Consuming Projects (Your Apps)
 
-Once you've installed `@codearemo/livemenu-ui` in your project, you can generate components directly:
+Once you've installed `@codearemo/livemenu-ui` in your project, you can generate modules directly:
 
 ### Installation
 
@@ -14,28 +14,28 @@ npm install @codearemo/livemenu-ui
 npm install git+https://github.com/codearemo/livemenu-ui.git
 ```
 
-### Generate Components in Your Project
+### Generate Modules in Your Project
 
 ```bash
 # Using npx (recommended)
-npx livemenu-generate RestaurantCard
+npx livemenu-generate restaurants
 
 # Or add to package.json scripts
 npm pkg set scripts.generate="livemenu-generate"
-npm run generate UserProfile
+npm run generate user-profile
 ```
 
 ### Examples
 
 ```bash
-# Generate a RestaurantCard component
-npx livemenu-generate RestaurantCard
+# Generate a restaurants module
+npx livemenu-generate restaurants
 
-# Generate a UserProfile component (kebab-case auto-converts)
+# Generate a user-profile module (kebab-case auto-converts)
 npx livemenu-generate user-profile
 
-# Generate an OrderHistory component
-npx livemenu-generate OrderHistory
+# Generate an orders module
+npx livemenu-generate orders
 ```
 
 ### What Gets Created
@@ -43,54 +43,107 @@ npx livemenu-generate OrderHistory
 ```
 your-project/
 └── src/
-    └── components/
-        └── RestaurantCard/
-            ├── RestaurantCard.tsx     # Component implementation
-            ├── index.ts               # Exports
-            └── RestaurantCard.test.tsx # Test file
+    └── modules/
+        └── restaurants/
+            ├── data/
+            │   ├── restaurants-repo-impl.ts
+            │   ├── local/
+            │   │   ├── restaurants-local-datasource.ts
+            │   │   └── restaurants-local-datasource-impl.ts
+            │   └── remote/
+            │       ├── restaurants-remote-datasource.ts
+            │       └── restaurants-remote-datasource-impl.ts
+            ├── domain/
+            │   ├── restaurants-repo.ts
+            │   ├── entities/
+            │   │   ├── models/          # Empty - add your models
+            │   │   └── params/          # Empty - add your params
+            │   └── usecases/
+            │       └── restaurants-usecases.ts
+            └── presentation/
+                ├── components/          # Empty - add your components
+                ├── hooks/
+                │   └── useRestaurants.ts
+                ├── screens/             # Empty - add your screens
+                └── state/
+                    └── restaurants-slice.ts
 ```
 
-### Generated Component Structure
+### Clean Architecture Structure
+
+The generator creates a complete **Clean Architecture** module with:
+
+#### 📁 **Data Layer**
+- **Repository Implementation** - Orchestrates data sources
+- **Remote Data Source** - API calls and external data
+- **Local Data Source** - Caching and local storage
+
+#### 🏛️ **Domain Layer**
+- **Repository Interface** - Abstract data contract
+- **Use Cases** - Business logic and validation
+- **Entities** - Models and parameters (you add these)
+
+#### 🎨 **Presentation Layer**
+- **React Hook** - Connects UI to business logic
+- **Redux Slice** - State management
+- **Components** - UI components (you add these)
+- **Screens** - Page components (you add these)
+
+### Example Generated Hook
 
 ```tsx
-import React from 'react';
-// Import LiveMenu UI components as needed
-// import { LiveMenuCard, LiveMenuButton } from '@codearemo/livemenu-ui';
+// presentation/hooks/useRestaurants.ts
+import { useCallback } from 'react';
+import { RestaurantsUsecases } from "../../domain/usecases/restaurants-usecases";
 
-export interface RestaurantCardProps {
-  children?: React.ReactNode;
-  className?: string;
-  // Add your props
-}
+const useRestaurants = () => {
+  const usecase = new RestaurantsUsecases();
 
-export const RestaurantCard: React.FC<RestaurantCardProps> = ({
-  children,
-  className = '',
-}) => {
-  return (
-    <div className={`restaurantcard ${className}`}>
-      {children}
-    </div>
-  );
+  // Add your hook methods here
+  const getRestaurants = useCallback(async () => {
+    try {
+      const response = await usecase.executeGetRestaurants();
+      return response;
+    } catch (error) {
+      console.error('Error in useRestaurants:', error);
+      throw error;
+    }
+  }, []);
+
+  return {
+    getRestaurants,
+  };
 };
 
-export default RestaurantCard;
+export default useRestaurants;
 ```
 
 ### Usage in Your App
 
 ```tsx
-import { RestaurantCard } from './components/RestaurantCard';
+// In your component
+import { useRestaurants } from './modules/restaurants/presentation/hooks/useRestaurants';
 import { LiveMenuCard, LiveMenuButton } from '@codearemo/livemenu-ui';
 
-function App() {
+function RestaurantsPage() {
+  const { getRestaurants } = useRestaurants();
+
+  const handleLoadRestaurants = async () => {
+    try {
+      const restaurants = await getRestaurants();
+      console.log('Restaurants:', restaurants);
+    } catch (error) {
+      console.error('Failed to load restaurants:', error);
+    }
+  };
+
   return (
-    <RestaurantCard>
-      <LiveMenuCard title="My Restaurant">
-        <p>Restaurant details here</p>
-        <LiveMenuButton variant="primary">View Menu</LiveMenuButton>
-      </LiveMenuCard>
-    </RestaurantCard>
+    <LiveMenuCard title="Restaurants">
+      <p>Manage your restaurants</p>
+      <LiveMenuButton variant="primary" onClick={handleLoadRestaurants}>
+        Load Restaurants
+      </LiveMenuButton>
+    </LiveMenuCard>
   );
 }
 ```
