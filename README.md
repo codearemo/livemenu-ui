@@ -33,7 +33,8 @@ LiveMenu UI is a comprehensive React component library built with TypeScript and
 📱 **Responsive** - Mobile-first design approach  
 🚀 **Production Ready** - Minified, optimized, and tested  
 🌗 **Dark Mode** - Built-in dark mode support with ThemeProvider  
-⚡ **React 18 & 19** - Compatible with latest React versions
+⚡ **React 18 & 19** - Compatible with latest React versions  
+🛠️ **Component Generator** - Automated scaffolding for new components
 
 ---
 
@@ -650,6 +651,45 @@ npm run watch
 | `npm run watch` | Build in watch mode for development |
 | `npm run prepare` | Runs automatically when installing from GitHub |
 | `npm run prepublishOnly` | Runs automatically before publishing |
+| `npm run generate:component <name>` | Generate a new component with complete structure |
+
+### Component Generator
+
+🚀 **New!** Quickly scaffold new components with our automated generator:
+
+```bash
+# Generate a new component
+npm run generate:component Select
+
+# Also supports kebab-case (auto-converts to PascalCase)
+npm run generate:component date-picker
+```
+
+**What gets generated:**
+- ✅ Component file with TypeScript interface (`LiveMenuComponentNameProps`)
+- ✅ Index file with proper exports
+- ✅ Documentation template in `docs/components/`
+- ✅ Automatic update to `src/components/index.ts`
+- ✅ JSDoc comments and usage examples
+- ✅ Dark mode support pattern
+
+**Generated structure:**
+```
+src/components/ComponentName/
+├── ComponentName.tsx          # Full component implementation
+└── index.ts                   # Exports
+
+docs/components/
+└── componentname.md           # Documentation template
+```
+
+**After generation:**
+1. Implement your component logic
+2. Add styles to `src/styles/tailwind.css` if needed
+3. Update the documentation
+4. Run `npm run build` to generate types
+
+[📚 Complete Generator Guide →](COMPONENT_GENERATOR_GUIDE.md) | [📚 Scripts Documentation →](scripts/README.md)
 
 ### Project Structure
 
@@ -683,7 +723,15 @@ livemenu-ui/
 
 ### Building Components
 
-When creating new components, follow these conventions:
+**Recommended:** Use the component generator to create new components:
+
+```bash
+npm run generate:component ComponentName
+```
+
+This automatically creates the proper structure with all required files. [See Component Generator above](#component-generator).
+
+**Manual Setup:** If creating components manually, follow these conventions:
 
 1. **File Structure:**
    ```
@@ -772,6 +820,7 @@ We welcome contributions to LiveMenu UI! Here's how you can help:
    ```
 
 3. **Make your changes**
+   - Use `npm run generate:component ComponentName` for new components
    - Follow existing code style
    - Update documentation
    - Add examples if needed

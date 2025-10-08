@@ -26,7 +26,8 @@
     "watch": "rollup -c -w",
     "prepare": "npm run build",
     "prepublishOnly": "npm run build",
-    "publish:github": "npm publish"
+    "publish:github": "npm publish",
+    "generate:component": "node scripts/generate-component.js"
   },
   "repository": {
     "type": "git",
