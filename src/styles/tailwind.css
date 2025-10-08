@@ -2,6 +2,99 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  /* Base text colors for light and dark modes */
+  body {
+    @apply bg-white dark:bg-dark-bg-primary;
+    @apply text-gray-900 dark:text-dark-text-primary;
+    @apply transition-colors duration-200;
+  }
+
+  /* Headings */
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-gray-900 dark:text-dark-text-primary;
+  }
+
+  /* Paragraphs and spans */
+  p {
+    @apply text-gray-700 dark:text-dark-text-secondary;
+  }
+
+  /* Links */
+  a {
+    @apply text-livemenu dark:text-livemenu;
+    @apply hover:text-livemenu-hover dark:hover:text-livemenu-hover;
+  }
+
+  /* Small text */
+  small {
+    @apply text-gray-600 dark:text-dark-text-tertiary;
+  }
+
+  /* Strong/Bold */
+  strong, b {
+    @apply text-gray-900 dark:text-dark-text-primary;
+    @apply font-semibold;
+  }
+
+  /* Lists */
+  ul, ol {
+    @apply text-gray-700 dark:text-dark-text-secondary;
+  }
+
+  /* Code */
+  code {
+    @apply text-gray-900 dark:text-dark-text-primary;
+    @apply bg-gray-100 dark:bg-dark-bg-tertiary;
+    @apply px-1.5 py-0.5 rounded;
+  }
+
+  /* Blockquote */
+  blockquote {
+    @apply text-gray-700 dark:text-dark-text-secondary;
+    @apply border-l-4 border-livemenu dark:border-livemenu;
+    @apply pl-4;
+  }
+
+  /* Pre */
+  pre {
+    @apply bg-gray-100 dark:bg-dark-bg-tertiary;
+    @apply text-gray-900 dark:text-dark-text-primary;
+    @apply p-4 rounded-lg;
+  }
+
+  /* HR */
+  hr {
+    @apply border-gray-200 dark:border-dark-border;
+  }
+
+  /* Tables */
+  table {
+    @apply text-gray-900 dark:text-dark-text-primary;
+  }
+
+  th {
+    @apply bg-gray-50 dark:bg-dark-bg-tertiary;
+    @apply text-gray-900 dark:text-dark-text-primary;
+  }
+
+  td {
+    @apply border-gray-200 dark:border-dark-border;
+  }
+
+  /* Form elements base */
+  input, textarea, select {
+    @apply bg-white dark:bg-dark-bg-tertiary;
+    @apply text-gray-900 dark:text-dark-text-primary;
+    @apply border-gray-300 dark:border-dark-border;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    @apply text-gray-400 dark:text-dark-text-tertiary;
+  }
+}
+
 @layer components {
   /* Button Base Styles */
   .livemenu-btn {
