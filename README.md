@@ -34,7 +34,7 @@ LiveMenu UI is a comprehensive React component library built with TypeScript and
 🚀 **Production Ready** - Minified, optimized, and tested  
 🌗 **Dark Mode** - Built-in dark mode support with ThemeProvider  
 ⚡ **React 18 & 19** - Compatible with latest React versions  
-🛠️ **Component Generator** - Automated scaffolding for new components
+🛠️ **Component Generator CLI** - Generate components in your project with `npx livemenu-generate`
 
 ---
 
@@ -172,6 +172,19 @@ import { LiveMenuButton, LiveMenuCard } from 'livemenu-ui';
 
 **Important:** Make sure to import the styles **before** your own styles to allow for easy overrides.
 
+### 5. Generate Components (Optional)
+
+🚀 **New!** Generate components in your project using the built-in CLI:
+
+```bash
+# Generate a component in your project
+npx livemenu-generate RestaurantCard
+```
+
+This creates a ready-to-use component that integrates with LiveMenu UI components!
+
+[📚 See Component Generator Guide →](#-component-generator-cli)
+
 ### 4. TypeScript Configuration (Optional)
 
 If using TypeScript, ensure your `tsconfig.json` includes:
@@ -185,6 +198,60 @@ If using TypeScript, ensure your `tsconfig.json` includes:
   }
 }
 ```
+
+---
+
+## 🛠️ Component Generator CLI
+
+🚀 **Generate components in your project** using the built-in CLI tool!
+
+Once you've installed LiveMenu UI, you can generate new components directly in your consuming project:
+
+```bash
+npx livemenu-generate RestaurantCard
+```
+
+### What Gets Created
+
+```
+your-project/src/components/RestaurantCard/
+├── RestaurantCard.tsx       # Component implementation
+├── index.ts                 # Exports
+└── RestaurantCard.test.tsx  # Test file
+```
+
+### Quick Examples
+
+```bash
+# Generate a restaurant card component
+npx livemenu-generate RestaurantCard
+
+# Generate a user profile (kebab-case auto-converts to PascalCase)
+npx livemenu-generate user-profile
+
+# Generate an order history component
+npx livemenu-generate OrderHistory
+```
+
+### Generated Component Uses LiveMenu UI
+
+The generated component is ready to integrate with LiveMenu UI components:
+
+```tsx
+import React from 'react';
+import { LiveMenuCard, LiveMenuButton } from '@codearemo/livemenu-ui';
+
+export const RestaurantCard: React.FC<Props> = ({ restaurant }) => {
+  return (
+    <LiveMenuCard title={restaurant.name}>
+      <p>{restaurant.description}</p>
+      <LiveMenuButton variant="primary">View Menu</LiveMenuButton>
+    </LiveMenuCard>
+  );
+};
+```
+
+**[📚 Complete Generator Documentation →](GENERATOR_USAGE.md)**
 
 ---
 
