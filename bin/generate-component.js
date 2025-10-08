@@ -269,20 +269,14 @@ function generateSupabaseDataSource(moduleName) {
 
 function generateSupabaseDataSourceImpl(moduleName) {
   const className = toPascalCase(moduleName);
-  return `import { createClient } from '@supabase/supabase-js';
-import { ${className}SupabaseDataSource } from "./${moduleName}-supabase-datasource";
+  return `import { ${className}SupabaseDataSource } from "./${moduleName}-supabase-datasource";
 
 export class ${className}SupabaseDataSourceImpl implements ${className}SupabaseDataSource {
-  private supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
-
   // Implement your Supabase data source methods here
   // Example:
   // async getData(table: string, filters?: Record<string, unknown>): Promise<unknown[]> {
   //   try {
-  //     let query = this.supabase.from(table).select('*');
+  //     let query = supabase.from(table).select('*');
   //     
   //     if (filters) {
   //       Object.entries(filters).forEach(([key, value]) => {
@@ -305,7 +299,7 @@ export class ${className}SupabaseDataSourceImpl implements ${className}SupabaseD
 
   // async createData(table: string, data: Record<string, unknown>): Promise<unknown> {
   //   try {
-  //     const { data: result, error } = await this.supabase
+  //     const { data: result, error } = await supabase
   //       .from(table)
   //       .insert(data)
   //       .select()
@@ -324,7 +318,7 @@ export class ${className}SupabaseDataSourceImpl implements ${className}SupabaseD
 
   // async updateData(table: string, id: string, data: Record<string, unknown>): Promise<unknown> {
   //   try {
-  //     const { data: result, error } = await this.supabase
+  //     const { data: result, error } = await supabase
   //       .from(table)
   //       .update(data)
   //       .eq('id', id)
@@ -344,7 +338,7 @@ export class ${className}SupabaseDataSourceImpl implements ${className}SupabaseD
 
   // async deleteData(table: string, id: string): Promise<void> {
   //   try {
-  //     const { error } = await this.supabase
+  //     const { error } = await supabase
   //       .from(table)
   //       .delete()
   //       .eq('id', id);
