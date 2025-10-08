@@ -39,3 +39,6 @@ export * from './Toast';
 
 // Export all LoaderWrapper components and types
 export * from './LoaderWrapper';
+
+// Export all Tabs components and types
+export * from './Tabs';
