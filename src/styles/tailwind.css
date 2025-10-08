@@ -206,7 +206,6 @@
   }
 
   .livemenu-card-body {
-    @apply px-6 py-4;
     @apply text-gray-700;
     /* Dark mode */
     @apply dark:text-dark-text-secondary;
