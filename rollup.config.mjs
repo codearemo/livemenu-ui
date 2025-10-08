@@ -40,6 +40,9 @@ const config = {
       minimize: true,
       inject: true,
       extract: 'styles.css',
+      config: {
+        path: './postcss.config.mjs',
+      },
     }),
     terser(),
   ],
