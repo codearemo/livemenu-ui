@@ -5,7 +5,10 @@ import terser from '@rollup/plugin-terser';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 
-export default {
+/**
+ * @type {import('rollup').RollupOptions}
+ */
+const config = {
   input: 'src/index.ts',
   output: [
     {
@@ -42,4 +45,6 @@ export default {
   ],
   external: ['react', 'react-dom'],
 };
+
+export default config;
 
