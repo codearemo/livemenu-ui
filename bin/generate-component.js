@@ -116,29 +116,26 @@ function createDirectoryStructure(basePath, structure) {
 
 function generateRemoteDataSource(moduleName) {
   const className = toPascalCase(moduleName);
-  return `export interface ApiResponse<T> {
-  data: T;
-  message: string;
-  success: boolean;
-}
+  return `import { GeneralRequestModel, GeneralResponseModel } from "@/src/core/api/http-types";
 
 export abstract class ${className}RemoteDataSource {
   // Add your remote data source methods here
   // Example:
-  // abstract getData(): Promise<ApiResponse<unknown>>;
+  // abstract getData(payload: GeneralRequestModel<unknown, unknown, unknown>): Promise<GeneralResponseModel<unknown>>;
 }
 `;
 }
 
 function generateRemoteDataSourceImpl(moduleName) {
   const className = toPascalCase(moduleName);
-  return `import { ApiResponse } from "./${moduleName}-remote-datasource";
+  return `import { GeneralRequestModel, GeneralResponseModel } from "@/src/core/api/http-types";
+import { ${className}RemoteDataSource } from "./${moduleName}-remote-datasource";
 
 export class ${className}RemoteDataSourceImpl implements ${className}RemoteDataSource {
   // Implement your remote data source methods here
   // Example:
-  // async getData(): Promise<ApiResponse<unknown>> {
-  //   // API call implementation here
+  // async getData(payload: GeneralRequestModel<unknown, unknown, unknown>): Promise<GeneralResponseModel<unknown>> {
+  //   // Implementation here
   //   throw new Error("Method not implemented.");
   // }
 }
@@ -147,25 +144,18 @@ export class ${className}RemoteDataSourceImpl implements ${className}RemoteDataS
 
 function generateRemoteRepoImpl(moduleName) {
   const className = toPascalCase(moduleName);
-  return `import { ${className}Repo } from "../domain/${moduleName}-repo";
+  return `import { GeneralRequestModel, GeneralResponseModel } from "@/src/core/api/http-types";
+import { ${className}Repo } from "../domain/${moduleName}-repo";
 import { ${className}RemoteDataSourceImpl } from "./remote/${moduleName}-remote-datasource-impl";
-import { ${className}LocalDataSourceImpl } from "./local/${moduleName}-local-datasource-impl";
 
 export class ${className}RepoImpl implements ${className}Repo {
   private readonly remoteDatasource = new ${className}RemoteDataSourceImpl();
-  private readonly localDatasource = new ${className}LocalDataSourceImpl();
 
   // Implement your repository methods here
   // Example:
-  // async getData(): Promise<unknown> {
+  // async getData(payload: GeneralRequestModel<unknown, unknown, unknown>): Promise<GeneralResponseModel<unknown>> {
   //   try {
-  //     // Try local first, then remote
-  //     const localData = await this.localDatasource.getCachedData();
-  //     if (localData) return localData;
-  //     
-  //     const remoteData = await this.remoteDatasource.getData();
-  //     await this.localDatasource.setCachedData(remoteData);
-  //     return remoteData;
+  //     return await this.remoteDatasource.getData(payload);
   //   } catch (error) {
   //     console.error('Failed to get data:', error);
   //     throw error;
@@ -177,34 +167,39 @@ export class ${className}RepoImpl implements ${className}Repo {
 
 function generateRepo(moduleName) {
   const className = toPascalCase(moduleName);
-  return `export abstract class ${className}Repo {
+  return `import { GeneralRequestModel, GeneralResponseModel } from "@/src/core/api/http-types";
+
+export abstract class ${className}Repo {
   // Add your repository methods here
   // Example:
-  // abstract getData(): Promise<unknown>;
+  // abstract getData(payload: GeneralRequestModel<unknown, unknown, unknown>): Promise<GeneralResponseModel<unknown>>;
 }
 `;
 }
 
 function generateUsecases(moduleName) {
   const className = toPascalCase(moduleName);
-  return `import { ${className}RepoImpl } from "../../data/${moduleName}-repo-impl";
+  return `import { GeneralRequestModel, GeneralResponseModel } from "@/src/core/api/http-types";
+import { ${className}RepoImpl } from "../../data/${moduleName}-repo-impl";
 
 export class ${className}Usecases {
   private readonly repo = new ${className}RepoImpl();
 
   // Add your use case methods here
   // Example:
-  // async executeGetData(): Promise<unknown> {
+  // async executeGetData(payload: GeneralRequestModel<unknown, unknown, unknown>): Promise<GeneralResponseModel<unknown>> {
   //   // Validate input parameters
-  //   // this.validateGetDataParams();
+  //   this.validateGetDataParams(payload.body);
   //   
-  //   return this.repo.getData();
+  //   return this.repo.getData(payload);
   // }
 
   // Add private validation methods here
   // Example:
-  // private validateGetDataParams(): void {
-  //   // Validation logic here
+  // private validateGetDataParams(params: unknown): void {
+  //   if (!params) {
+  //     throw new Error('Parameters are required');
+  //   }
   // }
 }
 `;
@@ -212,24 +207,30 @@ export class ${className}Usecases {
 
 function generateLocalDataSource(moduleName) {
   const className = toPascalCase(moduleName);
-  return `export abstract class ${className}LocalDataSource {
+  return `import { GeneralRequestModel, GeneralResponseModel } from "@/src/core/api/http-types";
+
+export abstract class ${className}LocalDataSource {
   // Add your local data source methods here
   // Example:
-  // abstract getCachedData(): Promise<unknown | null>;
-  // abstract setCachedData(data: unknown): Promise<void>;
-  // abstract clearCachedData(): Promise<void>;
+  // abstract getCachedData(key: string): Promise<unknown>;
+  // abstract setCachedData(key: string, data: unknown): Promise<void>;
+  // abstract clearCachedData(key: string): Promise<void>;
 }
 `;
 }
 
 function generateLocalDataSourceImpl(moduleName) {
   const className = toPascalCase(moduleName);
-  return `export class ${className}LocalDataSourceImpl implements ${className}LocalDataSource {
+  return `import * as SecureStore from "expo-secure-store";
+import { GeneralRequestModel, GeneralResponseModel } from "@/src/core/api/http-types";
+import { ${className}LocalDataSource } from "./${moduleName}-local-datasource";
+
+export class ${className}LocalDataSourceImpl implements ${className}LocalDataSource {
   // Implement your local data source methods here
-  // Example using localStorage (or AsyncStorage for React Native):
-  // async getCachedData(): Promise<unknown | null> {
+  // Example:
+  // async getCachedData(key: string): Promise<unknown> {
   //   try {
-  //     const data = localStorage.getItem('${moduleName}_cache');
+  //     const data = await SecureStore.getItemAsync(key);
   //     return data ? JSON.parse(data) : null;
   //   } catch (error) {
   //     console.error('Error getting cached data:', error);
@@ -237,18 +238,18 @@ function generateLocalDataSourceImpl(moduleName) {
   //   }
   // }
 
-  // async setCachedData(data: unknown): Promise<void> {
+  // async setCachedData(key: string, data: unknown): Promise<void> {
   //   try {
-  //     localStorage.setItem('${moduleName}_cache', JSON.stringify(data));
+  //     await SecureStore.setItemAsync(key, JSON.stringify(data));
   //   } catch (error) {
   //     console.error('Error setting cached data:', error);
   //     throw error;
   //   }
   // }
 
-  // async clearCachedData(): Promise<void> {
+  // async clearCachedData(key: string): Promise<void> {
   //   try {
-  //     localStorage.removeItem('${moduleName}_cache');
+  //     await SecureStore.deleteItemAsync(key);
   //   } catch (error) {
   //     console.error('Error clearing cached data:', error);
   //     throw error;
@@ -303,27 +304,22 @@ export default ${moduleName}Slice.reducer;
 
 function generateHook(moduleName) {
   const className = toPascalCase(moduleName);
-  return `import { useCallback } from 'react';
+  return `import { GeneralRequestModel, GeneralResponseModel } from "@/src/core/api/http-types";
 import { ${className}Usecases } from "../../domain/usecases/${moduleName}-usecases";
 
 const use${className} = () => {
-  const usecase = new ${className}Usecases();
-
-  // Add your hook methods here
-  // Example:
-  // const getData = useCallback(async () => {
-  //   try {
-  //     const response = await usecase.executeGetData();
-  //     return response;
-  //   } catch (error) {
-  //     console.error('Error in use${className}:', error);
-  //     throw error;
-  //   }
-  // }, []);
-
   return {
-    // Export your hook methods
-    // getData,
+    // Add your hook methods here
+    // Example:
+    // getData: async (payload: unknown): Promise<GeneralResponseModel<unknown>> => {
+    //   const usecase = new ${className}Usecases();
+    //   const response = await usecase.executeGetData({
+    //     body: payload,
+    //     params: null,
+    //     extra: null,
+    //   });
+    //   return response;
+    // },
   };
 };
 
@@ -348,8 +344,8 @@ function main() {
     console.log('\n📖 Usage: npx livemenu-generate <ModuleName>');
     console.log('\n📚 Examples:');
     console.log('   npx livemenu-generate restaurants');
-    console.log('   npx livemenu-generate user-profile  (converts to UserProfile)');
-    console.log('   npx livemenu-generate orders');
+    console.log('   npx livemenu-generate user-profile');
+    console.log('   npx livemenu-generate auth-service');
     console.log('\n💡 This will create a module in: src/modules/<ModuleName>/');
     console.log('\n🏗️  The module follows Clean Architecture with:');
     console.log('   - data/ (repository, data sources)');
@@ -358,17 +354,11 @@ function main() {
     process.exit(1);
   }
 
-  let moduleName = args[0];
+  const moduleName = args[0];
   
-  // Convert to PascalCase if kebab-case is provided
-  if (moduleName.includes('-')) {
-    moduleName = toPascalCase(moduleName);
-    console.log(`📝 Converting to PascalCase: ${moduleName}`);
-  }
-  
-  // Validate module name (PascalCase)
-  if (!/^[A-Z][a-zA-Z0-9]*$/.test(moduleName)) {
-    console.error('❌ Error: Module name must be in PascalCase (e.g., Restaurants, UserProfile)');
+  // Validate module name (kebab-case)
+  if (!/^[a-z][a-z0-9-]*[a-z0-9]$/.test(moduleName)) {
+    console.error('❌ Error: Module name must be in kebab-case (e.g., user-profile, auth-service)');
     process.exit(1);
   }
 
