@@ -3,14 +3,14 @@ import { LiveMenuModal, ModalOptions } from './Modal';
 
 export interface ModalInstance {
   id: string;
-  component: React.ComponentType<any>;
+  component: React.ComponentType<any> | React.ReactNode;
   props?: Record<string, any>;
   options: ModalOptions;
 }
 
 interface ModalContextValue {
   showModal: (
-    component: React.ComponentType<any>,
+    component: React.ComponentType<any> | React.ReactNode,
     options?: ModalOptions & { props?: Record<string, any> }
   ) => string;
   hideModal: (id: string) => void;
@@ -37,7 +37,7 @@ export const LiveMenuModalProvider: React.FC<LiveMenuModalProviderProps> = ({
 
   const showModal = useCallback(
     (
-      component: React.ComponentType<any>,
+      component: React.ComponentType<any> | React.ReactNode,
       options?: ModalOptions & { props?: Record<string, any> }
     ): string => {
       const id = `modal-${++modalIdCounter.current}`;
@@ -75,8 +75,29 @@ export const LiveMenuModalProvider: React.FC<LiveMenuModalProviderProps> = ({
     <ModalContext.Provider value={{ showModal, hideModal, hideAllModals }}>
       {children}
       {modals.map((modal, index) => {
-        const ModalComponent = modal.component;
         const zIndex = baseZIndex + index;
+        
+        // Check if component is a React element or a component type
+        const isReactElement = React.isValidElement(modal.component);
+        
+        let content: React.ReactNode;
+        if (isReactElement) {
+          // If it's already a React element, render it directly
+          content = modal.component as React.ReactNode;
+        } else if (typeof modal.component === 'function') {
+          // If it's a component function/class, instantiate it with props
+          const ModalComponent = modal.component as React.ComponentType<any>;
+          content = (
+            <ModalComponent
+              {...modal.props}
+              onClose={() => hideModal(modal.id)}
+              modalId={modal.id}
+            />
+          );
+        } else {
+          // For other React nodes (strings, numbers, etc.)
+          content = modal.component as React.ReactNode;
+        }
 
         return (
           <LiveMenuModal
@@ -86,11 +107,7 @@ export const LiveMenuModalProvider: React.FC<LiveMenuModalProviderProps> = ({
             {...modal.options}
             zIndex={zIndex}
           >
-            <ModalComponent
-              {...modal.props}
-              onClose={() => hideModal(modal.id)}
-              modalId={modal.id}
-            />
+            {content}
           </LiveMenuModal>
         );
       })}
@@ -134,13 +151,14 @@ export const setModalContext = (context: ModalContextValue) => {
 
 /**
  * Show a modal programmatically without using hooks
- * @param component - The component to render in the modal
+ * @param component - The component or React element to render in the modal
  * @param options - Modal options and props
  * @returns {string} Modal ID for later reference
  * @example
  * ```tsx
  * import { showModal } from 'livemenu-ui';
  * 
+ * // Using a component
  * showModal(ConfirmDialog, {
  *   size: 'sm',
  *   dismissable: false,
@@ -149,10 +167,15 @@ export const setModalContext = (context: ModalContextValue) => {
  *     message: 'Are you sure?'
  *   }
  * });
+ * 
+ * // Using a React element
+ * showModal(<div>Hello World</div>, {
+ *   size: 'md'
+ * });
  * ```
  */
 export const showModal = (
-  component: React.ComponentType<any>,
+  component: React.ComponentType<any> | React.ReactNode,
   options?: ModalOptions & { props?: Record<string, any> }
 ): string => {
   if (!standaloneModalContext) {
