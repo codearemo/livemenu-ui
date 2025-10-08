@@ -4,6 +4,8 @@ import typescript from '@rollup/plugin-typescript';
 import terser from '@rollup/plugin-terser';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
+import tailwindcss from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
 
 /**
  * @type {import('rollup').RollupOptions}
@@ -38,11 +40,12 @@ const config = {
     postcss({
       extensions: ['.css'],
       minimize: true,
-      inject: true,
+      inject: false,
       extract: 'styles.css',
-      config: {
-        path: './postcss.config.mjs',
-      },
+      plugins: [
+        tailwindcss('./tailwind.config.ts'),
+        autoprefixer(),
+      ],
     }),
     terser(),
   ],
@@ -50,4 +53,3 @@ const config = {
 };
 
 export default config;
-
