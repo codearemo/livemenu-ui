@@ -5,7 +5,7 @@
 ![Version](https://img.shields.io/badge/version-1.0.0-orange)
 ![React](https://img.shields.io/badge/React-18.x%20%7C%2019.x-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
-![Tailwind](https://img.shields.io/badge/Tailwind-4.x-38bdf8)
+![Tailwind](https://img.shields.io/badge/Tailwind-3.x-38bdf8)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 **A production-ready React component library for LiveMenu with Tailwind CSS styling and a custom orange color palette.**
