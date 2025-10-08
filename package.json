@@ -22,8 +22,8 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "rollup -c --configPlugin typescript",
-    "watch": "rollup -c -w --configPlugin typescript",
+    "build": "rollup -c",
+    "watch": "rollup -c -w",
     "prepare": "npm run build",
     "prepublishOnly": "npm run build",
     "publish:github": "npm publish"
@@ -59,7 +59,7 @@
     "@rollup/plugin-node-resolve": "^15.3.1",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
-    "@types/node": "^24.7.0",
+    "@tailwindcss/postcss": "^4.0.0",
     "@types/postcss-load-config": "^2.0.1",
     "@types/react": "^18.3.26",
     "@types/react-dom": "^18.3.7",
@@ -70,8 +70,7 @@
     "rollup": "^4.52.4",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
-    "tailwindcss": "^3.4.18",
-    "ts-node": "^10.9.2",
+    "tailwindcss": "^4.0.0",
     "tslib": "^2.8.1",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3"
