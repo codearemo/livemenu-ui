@@ -46,6 +46,10 @@ function generateModuleStructure(moduleName) {
       'remote': {
         [`${moduleName}-remote-datasource-impl.ts`]: generateRemoteDataSourceImpl(moduleName),
         [`${moduleName}-remote-datasource.ts`]: generateRemoteDataSource(moduleName)
+      },
+      'supabase': {
+        [`${moduleName}-supabase-datasource-impl.ts`]: generateSupabaseDataSourceImpl(moduleName),
+        [`${moduleName}-supabase-datasource.ts`]: generateSupabaseDataSource(moduleName)
       }
     },
     'domain': {
@@ -81,6 +85,8 @@ function generateModuleStructure(moduleName) {
   console.log(`   - data/local/${moduleName}-local-datasource.ts`);
   console.log(`   - data/remote/${moduleName}-remote-datasource-impl.ts`);
   console.log(`   - data/remote/${moduleName}-remote-datasource.ts`);
+  console.log(`   - data/supabase/${moduleName}-supabase-datasource-impl.ts`);
+  console.log(`   - data/supabase/${moduleName}-supabase-datasource.ts`);
   console.log(`   - domain/${moduleName}-repo.ts`);
   console.log(`   - domain/usecases/${moduleName}-usecases.ts`);
   console.log(`   - presentation/hooks/use${toPascalCase(moduleName)}.ts`);
@@ -241,6 +247,113 @@ export class ${className}LocalDataSourceImpl implements ${className}LocalDataSou
   //     await SecureStore.deleteItemAsync(key);
   //   } catch (error) {
   //     console.error('Error clearing cached data:', error);
+  //     throw error;
+  //   }
+  // }
+}
+`;
+}
+
+function generateSupabaseDataSource(moduleName) {
+  const className = toPascalCase(moduleName);
+  return `export abstract class ${className}SupabaseDataSource {
+  // Add your Supabase data source methods here
+  // Example:
+  // abstract getData(table: string, filters?: Record<string, unknown>): Promise<unknown[]>;
+  // abstract createData(table: string, data: Record<string, unknown>): Promise<unknown>;
+  // abstract updateData(table: string, id: string, data: Record<string, unknown>): Promise<unknown>;
+  // abstract deleteData(table: string, id: string): Promise<void>;
+}
+`;
+}
+
+function generateSupabaseDataSourceImpl(moduleName) {
+  const className = toPascalCase(moduleName);
+  return `import { createClient } from '@supabase/supabase-js';
+import { ${className}SupabaseDataSource } from "./${moduleName}-supabase-datasource";
+
+export class ${className}SupabaseDataSourceImpl implements ${className}SupabaseDataSource {
+  private supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+
+  // Implement your Supabase data source methods here
+  // Example:
+  // async getData(table: string, filters?: Record<string, unknown>): Promise<unknown[]> {
+  //   try {
+  //     let query = this.supabase.from(table).select('*');
+  //     
+  //     if (filters) {
+  //       Object.entries(filters).forEach(([key, value]) => {
+  //         query = query.eq(key, value);
+  //       });
+  //     }
+  //     
+  //     const { data, error } = await query;
+  //     
+  //     if (error) {
+  //       throw new Error(\`Supabase error: \${error.message}\`);
+  //     }
+  //     
+  //     return data || [];
+  //   } catch (error) {
+  //     console.error('Error getting data from Supabase:', error);
+  //     throw error;
+  //   }
+  // }
+
+  // async createData(table: string, data: Record<string, unknown>): Promise<unknown> {
+  //   try {
+  //     const { data: result, error } = await this.supabase
+  //       .from(table)
+  //       .insert(data)
+  //       .select()
+  //       .single();
+  //     
+  //     if (error) {
+  //       throw new Error(\`Supabase error: \${error.message}\`);
+  //     }
+  //     
+  //     return result;
+  //   } catch (error) {
+  //     console.error('Error creating data in Supabase:', error);
+  //     throw error;
+  //   }
+  // }
+
+  // async updateData(table: string, id: string, data: Record<string, unknown>): Promise<unknown> {
+  //   try {
+  //     const { data: result, error } = await this.supabase
+  //       .from(table)
+  //       .update(data)
+  //       .eq('id', id)
+  //       .select()
+  //       .single();
+  //     
+  //     if (error) {
+  //       throw new Error(\`Supabase error: \${error.message}\`);
+  //     }
+  //     
+  //     return result;
+  //   } catch (error) {
+  //     console.error('Error updating data in Supabase:', error);
+  //     throw error;
+  //   }
+  // }
+
+  // async deleteData(table: string, id: string): Promise<void> {
+  //   try {
+  //     const { error } = await this.supabase
+  //       .from(table)
+  //       .delete()
+  //       .eq('id', id);
+  //     
+  //     if (error) {
+  //       throw new Error(\`Supabase error: \${error.message}\`);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error deleting data from Supabase:', error);
   //     throw error;
   //   }
   // }
