@@ -168,6 +168,9 @@ export const LiveMenuTabs: React.FC<LiveMenuTabsProps> = ({
   const tabListClasses = [
     'livemenu-tabs-list',
     'flex',
+    fullWidth ? 'flex-wrap' : 'flex-nowrap',
+    'overflow-x-auto',
+    'scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-transparent',
     fullWidth ? 'w-full' : 'w-auto',
     variant === 'underline' ? 'border-b border-gray-200 dark:border-gray-700' : '',
     variant === 'pills' ? 'gap-2 p-1 bg-gray-100 dark:bg-gray-800 rounded-lg' : '',
@@ -212,7 +215,8 @@ export const LiveMenuTabs: React.FC<LiveMenuTabsProps> = ({
                 'livemenu-tab',
                 getVariantClasses(isActive, isDisabled),
                 sizeClasses[size],
-                fullWidth ? 'flex-1' : '',
+                fullWidth ? 'flex-1' : 'flex-shrink-0',
+                'whitespace-nowrap',
                 'cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900',
               ]
                 .filter(Boolean)

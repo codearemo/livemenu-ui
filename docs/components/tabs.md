@@ -28,6 +28,17 @@ function App() {
 }
 ```
 
+## Features
+
+- ✨ **Multiple Variants**: Choose from underline, pills, or bordered tab styles
+- 📱 **Responsive Design**: Automatically scrollable when tabs overflow the container
+- ⌨️ **Keyboard Navigation**: Full keyboard accessibility support
+- 🎨 **Dark Mode Support**: Beautiful appearance in both light and dark themes
+- 🔧 **Flexible Configuration**: Controlled or uncontrolled modes
+- 🏷️ **Rich Content**: Support for icons, badges, and disabled states
+- 📏 **Size Options**: Small, medium, and large sizes available
+- 🎯 **Full Width Option**: Tabs can stretch to fill the container
+
 ## Props
 
 ### LiveMenuTabsProps
@@ -157,6 +168,33 @@ const tabs = [
 // Large
 <LiveMenuTabs tabs={tabs} size="lg" />
 ```
+
+### Scrollable Tabs (Overflow Handling)
+
+When you have many tabs that don't fit in the available width, the tab list will automatically become scrollable. The component includes a styled scrollbar for a better user experience.
+
+```tsx
+// Example with many tabs
+const manyTabs = [
+  { id: 'tab1', label: 'Dashboard', content: <div>Dashboard</div> },
+  { id: 'tab2', label: 'Analytics', content: <div>Analytics</div> },
+  { id: 'tab3', label: 'Reports', content: <div>Reports</div> },
+  { id: 'tab4', label: 'Users', content: <div>Users</div> },
+  { id: 'tab5', label: 'Settings', content: <div>Settings</div> },
+  { id: 'tab6', label: 'Billing', content: <div>Billing</div> },
+  { id: 'tab7', label: 'Integrations', content: <div>Integrations</div> },
+  { id: 'tab8', label: 'API Keys', content: <div>API Keys</div> },
+  { id: 'tab9', label: 'Webhooks', content: <div>Webhooks</div> },
+  { id: 'tab10', label: 'Logs', content: <div>Logs</div> }
+];
+
+// In a constrained container, these tabs will be scrollable
+<div style={{ maxWidth: '600px' }}>
+  <LiveMenuTabs tabs={manyTabs} variant="underline" />
+</div>
+```
+
+**Note**: When using `fullWidth={true}`, tabs will wrap to the next line instead of becoming scrollable.
 
 ### Controlled Tabs
 

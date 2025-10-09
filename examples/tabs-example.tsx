@@ -171,7 +171,34 @@ export function ControlledTabsExample() {
 }
 
 /**
- * Example 9: Complex Content
+ * Example 9: Scrollable Tabs (Many Tabs)
+ */
+export function ScrollableTabsExample() {
+  const manyTabs: TabItem[] = [
+    { id: 'dashboard', label: 'Dashboard', content: <div className="p-4">Dashboard Overview</div> },
+    { id: 'analytics', label: 'Analytics', content: <div className="p-4">Analytics Data</div> },
+    { id: 'reports', label: 'Reports', content: <div className="p-4">Reports Section</div> },
+    { id: 'users', label: 'User Management', content: <div className="p-4">User Management</div> },
+    { id: 'settings', label: 'Settings', content: <div className="p-4">Settings Panel</div> },
+    { id: 'billing', label: 'Billing', content: <div className="p-4">Billing Information</div> },
+    { id: 'integrations', label: 'Integrations', content: <div className="p-4">Third-party Integrations</div> },
+    { id: 'api', label: 'API Keys', content: <div className="p-4">API Keys Management</div> },
+    { id: 'webhooks', label: 'Webhooks', content: <div className="p-4">Webhook Configuration</div> },
+    { id: 'logs', label: 'Activity Logs', content: <div className="p-4">Activity Logs</div> },
+  ];
+
+  return (
+    <div style={{ maxWidth: '700px' }}>
+      <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+        When tabs overflow, they become scrollable horizontally with a styled scrollbar.
+      </p>
+      <LiveMenuTabs tabs={manyTabs} variant="underline" />
+    </div>
+  );
+}
+
+/**
+ * Example 10: Complex Content
  */
 export function ComplexContentTabsExample() {
   const tabs: TabItem[] = [
@@ -307,7 +334,12 @@ export function AllTabsExamples() {
       </section>
 
       <section>
-        <h2 className="text-2xl font-bold mb-4">9. Complex Content</h2>
+        <h2 className="text-2xl font-bold mb-4">9. Scrollable Tabs (Overflow Handling)</h2>
+        <ScrollableTabsExample />
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-bold mb-4">10. Complex Content</h2>
         <ComplexContentTabsExample />
       </section>
     </div>

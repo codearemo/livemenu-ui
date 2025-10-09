@@ -34,6 +34,7 @@ A fully-featured, accessible tabs component has been successfully added to the L
 - 🎨 **Icons** - Optional icons before labels
 - 🔔 **Badges** - Optional badges after labels (e.g., notification counts)
 - 📱 **Full width option** - Responsive layout support
+- 📜 **Scrollable overflow** - Automatically scrollable when tabs exceed container width
 - 🎨 **Custom styling** - Multiple className props for granular control
 - ♿ **Accessibility** - Full ARIA support and keyboard navigation
 - 🌙 **Dark mode** - Automatic dark mode support
@@ -79,6 +80,11 @@ interface TabItem {
 - **Theme Integration**: Uses primary colors from theme
 - **Dark Mode**: Automatic dark mode variants
 - **Focus States**: Proper focus ring for accessibility
+- **Scrollable Overflow**: Horizontal scrolling with custom scrollbar styling when tabs overflow
+  - `overflow-x-auto` for horizontal scrolling
+  - `flex-nowrap` to prevent wrapping (when not full-width)
+  - `flex-shrink-0` on tabs to maintain size
+  - Custom scrollbar styling for better UX
 
 ## 📖 Usage Examples
 
@@ -139,6 +145,26 @@ const [activeTab, setActiveTab] = useState('tab1');
   fullWidth
   size="lg"
 />
+```
+
+### Scrollable Tabs (Many Tabs)
+
+```tsx
+const manyTabs = [
+  { id: 'tab1', label: 'Dashboard', content: <div>Dashboard</div> },
+  { id: 'tab2', label: 'Analytics', content: <div>Analytics</div> },
+  { id: 'tab3', label: 'Reports', content: <div>Reports</div> },
+  { id: 'tab4', label: 'Users', content: <div>Users</div> },
+  { id: 'tab5', label: 'Settings', content: <div>Settings</div> },
+  { id: 'tab6', label: 'Billing', content: <div>Billing</div> },
+  { id: 'tab7', label: 'Integrations', content: <div>Integrations</div> },
+  { id: 'tab8', label: 'API Keys', content: <div>API Keys</div> },
+];
+
+// Tabs will automatically become scrollable in constrained containers
+<div style={{ maxWidth: '600px' }}>
+  <LiveMenuTabs tabs={manyTabs} />
+</div>
 ```
 
 ## ♿ Accessibility Features
