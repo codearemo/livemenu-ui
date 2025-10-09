@@ -42,3 +42,6 @@ export * from './LoaderWrapper';
 
 // Export all Tabs components and types
 export * from './Tabs';
+
+// Export all Drawer components and types
+export * from './Drawer';
