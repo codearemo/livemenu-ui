@@ -94,7 +94,7 @@ export const LiveMenuRadio: React.FC<LiveMenuRadioProps> = ({
   const radioClasses = (isDisabled: boolean) => `
     ${sizeClasses[size]}
     border-gray-300 dark:border-dark-border
-    text-livemenu focus:ring-livemenu focus:ring-2 focus:ring-offset-2
+    text-primary focus:ring-primary focus:ring-2 focus:ring-offset-2
     dark:bg-dark-bg-tertiary dark:focus:ring-offset-dark-bg-primary
     transition-colors cursor-pointer
     ${isDisabled ? 'opacity-50 cursor-not-allowed' : ''}

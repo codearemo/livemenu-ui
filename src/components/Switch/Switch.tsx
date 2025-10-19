@@ -79,7 +79,7 @@ export const LiveMenuSwitch: React.FC<LiveMenuSwitchProps> = ({
 
   // Variant colors
   const variantClasses = {
-    primary: 'bg-livemenu',
+    primary: 'bg-primary',
     success: 'bg-success',
     danger: 'bg-danger',
   };
@@ -100,7 +100,7 @@ export const LiveMenuSwitch: React.FC<LiveMenuSwitchProps> = ({
           relative inline-flex items-center
           rounded-full
           transition-colors duration-200 ease-in-out
-          focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-livemenu
+          focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary
           dark:focus:ring-offset-dark-bg-primary
           ${
             checked

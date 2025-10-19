@@ -68,7 +68,7 @@ export const LiveMenuCheckbox: React.FC<LiveMenuCheckboxProps> = ({
   const checkboxClasses = `
     ${sizeClasses[size]}
     rounded border-gray-300 dark:border-dark-border
-    text-livemenu focus:ring-livemenu focus:ring-2 focus:ring-offset-2
+    text-primary focus:ring-primary focus:ring-2 focus:ring-offset-2
     dark:bg-dark-bg-tertiary dark:focus:ring-offset-dark-bg-primary
     transition-colors cursor-pointer
     disabled:opacity-50 disabled:cursor-not-allowed
