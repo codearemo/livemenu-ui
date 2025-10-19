@@ -1,4 +1,5 @@
 import React from 'react';
+import { LiveMenuSpinner } from '../Spinner';
 
 export interface LiveMenuButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -22,6 +23,10 @@ export interface LiveMenuButtonProps extends React.ButtonHTMLAttributes<HTMLButt
    */
   disabled?: boolean;
   /**
+   * Whether the button is in loading state
+   */
+  loading?: boolean;
+  /**
    * Whether the button should take full width
    */
   fullWidth?: boolean;
@@ -39,6 +44,10 @@ export interface LiveMenuButtonProps extends React.ButtonHTMLAttributes<HTMLButt
  * <LiveMenuButton variant="primary" size="md" onClick={() => console.log('clicked')}>
  *   Click Me
  * </LiveMenuButton>
+ * 
+ * <LiveMenuButton loading variant="primary">
+ *   Saving...
+ * </LiveMenuButton>
  * ```
  */
 export const LiveMenuButton: React.FC<LiveMenuButtonProps> = ({
@@ -47,6 +56,7 @@ export const LiveMenuButton: React.FC<LiveMenuButtonProps> = ({
   variant = 'primary',
   size = 'md',
   disabled = false,
+  loading = false,
   fullWidth = false,
   className = '',
   ...props
@@ -88,13 +98,29 @@ export const LiveMenuButton: React.FC<LiveMenuButtonProps> = ({
     .filter(Boolean)
     .join(' ');
   
+  // Determine spinner size based on button size
+  const spinnerSize = size === 'sm' ? 'sm' : size === 'lg' ? 'md' : 'sm';
+  
+  // Determine spinner color based on variant
+  const getSpinnerColor = () => {
+    if (variant === 'outline' || variant === 'light' || variant === 'text') {
+      return 'border-gray-900 dark:border-white';
+    }
+    return 'border-white';
+  };
+  
   return (
     <button
       className={buttonClasses}
       onClick={onClick}
-      disabled={disabled}
+      disabled={disabled || loading}
       {...props}
     >
+      {loading && (
+        <span className="inline-flex items-center mr-2">
+          <LiveMenuSpinner size={spinnerSize} color={getSpinnerColor()} />
+        </span>
+      )}
       {children}
     </button>
   );

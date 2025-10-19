@@ -45,3 +45,6 @@ export * from './Tabs';
 
 // Export all Drawer components and types
 export * from './Drawer';
+
+// Export all Spinner components and types
+export * from './Spinner';
