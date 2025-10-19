@@ -127,7 +127,10 @@ export const LiveMenuInput: React.FC<LiveMenuInputProps> = ({
       <div className="relative">
         {/* Prefix */}
         {prefix && (
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <div 
+            className="absolute inset-y-0 left-0 pl-3 flex items-center"
+            onMouseDown={(e) => e.preventDefault()}
+          >
             <span className="livemenu-text-tertiary">
               {prefix}
             </span>
@@ -154,7 +157,10 @@ export const LiveMenuInput: React.FC<LiveMenuInputProps> = ({
         
         {/* Suffix */}
         {suffix && (
-          <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+          <div 
+            className="absolute inset-y-0 right-0 pr-3 flex items-center"
+            onMouseDown={(e) => e.preventDefault()}
+          >
             <span className={error ? 'text-danger' : 'livemenu-text-tertiary'}>
               {suffix}
             </span>

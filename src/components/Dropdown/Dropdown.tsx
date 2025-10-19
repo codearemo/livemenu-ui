@@ -133,7 +133,7 @@ export const LiveMenuDropdown = <T = null,>({
 
   const baseClass = error ? 'livemenu-input-error' : 'livemenu-input';
   const fullWidthClass = fullWidth ? 'w-full' : '';
-  const iconPaddingClass = prefix ? 'pl-10' : '';
+  const iconPaddingClass = prefix ? 'pl-10' : suffix ? 'pr-10' : '';
 
   return (
     <div className={fullWidth ? 'w-full' : ''} ref={dropdownRef}>
@@ -148,7 +148,10 @@ export const LiveMenuDropdown = <T = null,>({
       <div className="relative">
         {/* Prefix */}
         {prefix && (
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
+          <div 
+            className="absolute inset-y-0 left-0 pl-3 flex items-center z-10"
+            onClick={(e) => e.stopPropagation()}
+          >
             <span className="livemenu-text-tertiary">
               {prefix}
             </span>
@@ -182,7 +185,10 @@ export const LiveMenuDropdown = <T = null,>({
           </span>
           <div className="flex items-center gap-2">
             {suffix && (
-              <span className="livemenu-text-tertiary">
+              <span 
+                className="livemenu-text-tertiary"
+                onClick={(e) => e.stopPropagation()}
+              >
                 {suffix}
               </span>
             )}
