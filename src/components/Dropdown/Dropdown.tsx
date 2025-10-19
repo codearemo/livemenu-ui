@@ -209,7 +209,7 @@ export const LiveMenuDropdown = <T = null,>({
         {isOpen && (
           <div
             className="
-              absolute z-50 mt-2 w-full
+              absolute z-50 mt-2 min-w-full
               livemenu-surface-elevated
               rounded-md shadow-lg
               max-h-60 overflow-auto
@@ -226,6 +226,7 @@ export const LiveMenuDropdown = <T = null,>({
                   w-full text-left px-4 py-3 text-sm
                   transition-colors
                   flex items-center gap-2
+                  whitespace-nowrap
                   ${
                     option.value === value
                       ? 'bg-livemenu-light dark:bg-livemenu/10 text-livemenu font-medium'
