@@ -48,3 +48,6 @@ export * from './Drawer';
 
 // Export all Spinner components and types
 export * from './Spinner';
+
+// Export all DateRangeFilter components and types
+export * from './DateRangeFilter';
