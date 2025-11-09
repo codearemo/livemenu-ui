@@ -77,28 +77,41 @@ import { LiveMenuAlert } from 'livemenu-ui';
 
 **File:** `src/components/Dropdown/Dropdown.tsx`
 
-Custom dropdown/select component with search and icons support.
+Custom dropdown/select component with optional multi-select and search.
 
 ### Props
 
 ```typescript
-interface DropdownOption {
+interface DropdownOption<T = string> {
   label: string;
-  value: string;
+  value: T;
   disabled?: boolean;
   icon?: React.ReactNode;
+  prefix?: React.ReactNode;
+  suffix?: React.ReactNode;
 }
 
-interface LiveMenuDropdownProps {
-  options: DropdownOption[];
-  value?: string;
-  onChange?: (value: string) => void;
+interface LiveMenuDropdownProps<T = string> {
+  options: DropdownOption<T>[];
+  value?: T | T[];
+  onChange?: (
+    value: T | T[],
+    option?: DropdownOption<T>,
+    meta?: { selectedValues: T[]; selectedOptions: DropdownOption<T>[] }
+  ) => void;
   placeholder?: string;
   label?: string;
   disabled?: boolean;
   required?: boolean;
   error?: string;
   fullWidth?: boolean;
+  prefix?: React.ReactNode;
+  suffix?: React.ReactNode;
+  multiple?: boolean;
+  searchable?: boolean;
+  searchPlaceholder?: string;
+  noResultsMessage?: React.ReactNode;
+  filterOptions?: (options: DropdownOption<T>[], query: string) => DropdownOption<T>[];
   className?: string;
 }
 ```
@@ -119,11 +132,33 @@ const countries = [
   label="Country"
   options={countries}
   value={selectedCountry}
-  onChange={setSelectedCountry}
+  onChange={(next) => {
+    if (typeof next === 'string') setSelectedCountry(next);
+  }}
   fullWidth
 />
 
-// With icons
+// Multi-select with search
+const roleOptions = [
+  { label: 'Admin', value: 'admin' },
+  { label: 'Editor', value: 'editor' },
+  { label: 'Viewer', value: 'viewer' },
+  { label: 'Billing', value: 'billing' },
+];
+
+<LiveMenuDropdown
+  label="Team roles"
+  options={roleOptions}
+  value={selectedRoles}
+  multiple
+  searchable
+  placeholder="Select roles"
+  onChange={(next) => {
+    setSelectedRoles(Array.isArray(next) ? next : [next]);
+  }}
+/>
+
+// With icons and error state
 const statusOptions = [
   { label: 'Active', value: 'active', icon: <span>✓</span> },
   { label: 'Pending', value: 'pending', icon: <span>⏱</span> },
@@ -131,27 +166,24 @@ const statusOptions = [
 ];
 
 <LiveMenuDropdown
+  label="Status"
   options={statusOptions}
   value={status}
-  onChange={setStatus}
-/>
-
-// With error
-<LiveMenuDropdown
-  label="Plan"
-  options={plans}
-  error="Please select a plan"
+  onChange={(next) => {
+    if (typeof next === 'string') setStatus(next);
+  }}
+  error={!status ? 'Please choose a status' : undefined}
   required
 />
 ```
 
 ### Features
-- Custom styled dropdown (not native select)
-- Icon support for options
-- Keyboard navigation (ESC to close)
-- Click-outside to close
-- Selected state indicator
-- Dark mode support
+- Optional multi-select with inline checkboxes
+- Sticky search input for large option sets
+- Customizable filter logic via `filterOptions`
+- Icon, prefix, and suffix support for options
+- Keyboard navigation (ESC to close), click-outside handling
+- Selected state indicators with dark mode support
 
 ---
 
